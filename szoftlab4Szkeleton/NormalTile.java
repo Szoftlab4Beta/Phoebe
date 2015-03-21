@@ -14,5 +14,10 @@ public class NormalTile extends Tile {
 	public Patch getPatch(){
 		return null;
 	}
+	
+	@Override
+	public void accept(Robot robot) {
+		robot.collide(this);
+	}
 
 }

@@ -6,4 +6,9 @@ public class Oil extends Patch{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void accept(Robot robot) {
+		robot.collide(this);
+	}
+	
 }

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import szoftlab4Szkeleton.VectorClass.Direction;
 
-public abstract class Tile {
+public abstract class Tile implements IAcceptor{
 
 	Map<Direction, Tile> sides;
 	

@@ -6,4 +6,9 @@ public class Finish extends Tile{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void accept(Robot robot) {
+		robot.collide(this);
+	}
+	
 }
