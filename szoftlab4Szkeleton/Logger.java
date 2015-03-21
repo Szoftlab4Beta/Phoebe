@@ -31,8 +31,8 @@ public class Logger {
 	public static void logReturn(Object object, String msg){
 		if(!IDs.containsKey(object))
 			throw new IllegalArgumentException("Logger doesn't contain this object");
+		indent = indent.substring(0, indent.length() - 1);
 		System.out.println(indent + "<-" + IDs.get(object) + "." + msg);
-		indent = indent.substring(0, indent.length() - 2);
 	}
 	
 }
