@@ -35,4 +35,7 @@ public class Logger {
 		System.out.println(indent + "<-" + IDs.get(object) + "." + msg);
 	}
 	
+	public static String getIDOf(Object object){
+		return IDs.get(object);
+	}
 }
