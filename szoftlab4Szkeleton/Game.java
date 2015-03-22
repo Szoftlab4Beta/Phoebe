@@ -17,20 +17,20 @@ public class Game {
 	public Game() {
 		Logger.logMSG("########## SZKELETON ##########");
     	Logger.logMSG("");
-    	Logger.logMSG("SzeretnĂ©l jĂˇtszani? (i/n)");
+    	Logger.logMSG("Szeretnél játszani? (i/n):\t");
     	
     	boolean run = false;
     	Scanner in = new Scanner(System.in);
-    	if (in.nextLine().toLowerCase() == "i") {
+    	if (in.next().toLowerCase() == "i") {
     		run = true;
     	}
     	
 		while (run) {
-			Logger.logMSG("JĂˇtĂ©kosok szĂˇma? (0-10)");
+			Logger.logMSG("Játékosok száma? (0-10):\t");
 			in = new Scanner(System.in);
 			playerNum = in.nextInt();
 			
-			Logger.logMSG("KĂ¶rĂ¶k szĂˇma? (0-10)");
+			Logger.logMSG("Körök száma? (0-10):\t");
 			in = new Scanner(System.in);
 			turns = in.nextInt();
 			
@@ -40,9 +40,9 @@ public class Game {
 			while (winner == 0){
 				currentRobot = 1;
 				for (Robot element : robots) {
-					// Ă–ssze visza mennek, jelenleg, hogy legyen?
+					// Össze visza mennek, jelenleg, hogy legyen?
 					///MEG KELL KÉRDEZNI A USER-T MELYIK IRÁNYBA MENJENEK SWITCH... ?
-					///mMEG KELL KÉRDEZNI AKAR E FOLTOT HAGYNI (ÉS MILYET)
+					///MEG KELL KÉRDEZNI AKAR E FOLTOT HAGYNI (ÉS MILYET)
 				    setTurn(
 				    		VectorClass.Direction.values()[1 + (int)(Math.random()*5)],
 				    		Patch.PatchType.values()[1 + (int)(Math.random()*5)]
@@ -52,15 +52,15 @@ public class Game {
 				nextTurn();		
 				winner = testWinCondition();
 				
-				Logger.logMSG("Melyik robot nyert? (0-" + playerNum  + "), | -1 senki -> JĂˇtĂ©k vĂ©ge | 0 senki, foyltatĂˇs");
+				Logger.logMSG("Melyik robot nyert? (0-" + playerNum  + "), | -1 senki -> Játék vége | 0 senki, foyltatás:\t");
 				in = new Scanner(System.in);
 				winner = in.nextInt();
 			}
 			
-			Logger.logMSG("SzeretnĂ©l Ăşjat jĂˇtszani? (i/n)");
+			Logger.logMSG("Szeretnél újat játszani? (i/n):\t");
 	    	run = false;
 	    	in = new Scanner(System.in);
-	    	if (in.nextLine().toLowerCase() == "i") {
+	    	if (in.next().toLowerCase() == "i") {
 	    		run = true;
 	    	}
 		}	
@@ -71,7 +71,7 @@ public class Game {
 		mapFactory = new MapFactory();
 		mapFactory.buildMap();
 		for(int i = 0; i < playerNum; i++){
-			// KĂ©szletek bekĂ©rĂ©se, kell-e ?
+			// Készletek bekérése, kell-e ?
 			///NEM KELL, EZT 
 			robots.add( new Robot(mapFactory.getNextSpawn(), 10, 10) );
 		}
@@ -81,7 +81,7 @@ public class Game {
 	
 	public void setTurn(Direction d, PatchType type){
 		Logger.logCall(this, "setTurn()");
-		if (currentRobot < playerNum){ // Ă�tĂ­r ernyĹ‘re
+		if (currentRobot < playerNum){ // Átír ernyőre
 			Robot robot = robots.get(currentRobot);
 			robot.modifySpeed(d);
 			robot.placePatch(type);
@@ -101,11 +101,11 @@ public class Game {
 	
 	int testWinCondition(){
 		Logger.logCall(this, "testWinCondition()");
-		if (currentTurn == turns) { // Ă�tĂ­rni ernyĹ‘re
+		if (currentTurn == turns) { // Átírni ernyőre
 			for (Robot element : robots) {
 			    element.getDistance();
 			}
-			//BekĂ©ne kĂ©rni nyert-e valaki?
+			//Bekéne kérni nyert-e valaki?
 			///IGEN
 			Logger.logReturn(this, "0");
 			return 0;
@@ -116,13 +116,13 @@ public class Game {
 			for (Robot element : robots) {
 			    win = element.isAtFinish();
 			    die = element.isDead();
-			    //BekĂ©ri Finishelt-e ?
+			    //Bekéri Finishelt-e ?
 			    ///PONTOSAN
 			    if (win){
 			    	Logger.logReturn(this, ""+ index);
 			    	return index;
 			    }
-			    //BekĂ©ri meghalt-e ?
+			    //Bekéri meghalt-e ?
 			    ///SZINTÉN
 			    if (die) {
 			    	element.dead = true;
