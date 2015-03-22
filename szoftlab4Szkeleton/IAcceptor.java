@@ -1,5 +1,5 @@
 package szoftlab4Szkeleton;
 
 public interface IAcceptor {
-	public void accept(Robot robot);
+	public void accept(IColliding colliding);
 }

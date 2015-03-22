@@ -7,8 +7,8 @@ public class Finish extends Tile{
 	}
 
 	@Override
-	public void accept(Robot robot) {
-		robot.collide(this);
+	public void accept(IColliding colliding) {
+		colliding.collide(this);
 	}
 	
 }
