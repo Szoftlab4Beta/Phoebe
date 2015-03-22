@@ -3,6 +3,8 @@ package szoftlab4Szkeleton;
 public class Finish extends Tile{
 
 	public Finish() {
+        Logger.logCreate(this, "finishTile");
+
 		// TODO Auto-generated constructor stub
 	}
 
