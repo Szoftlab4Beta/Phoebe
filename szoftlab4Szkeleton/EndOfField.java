@@ -1,14 +1,23 @@
 package szoftlab4Szkeleton;
 
+/**
+ * Egy speciális mező (Tile) típus, 
+ * mely jelenleg a pálya széleit reprezentálja.
+ */
+
 public class EndOfField extends Tile{
 
 	public EndOfField() {
-		// TODO Auto-generated constructor stub
+		
 	}
-
+	
+	/**
+	 * A mező észleli ha rálépett a robot, a robot pedig ekkor meghal.
+	 */
 	@Override
 	public void accept(Robot robot) {
 		robot.collide(this);
+		robot.dead = true;
 	}
 
 }
