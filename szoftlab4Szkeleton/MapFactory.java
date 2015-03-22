@@ -9,11 +9,20 @@ public class MapFactory {
 	
 	List<Tile> spawnTiles;
 
+	/**
+	 * A pálya felépítéséért, és a Robotok kezdőpozíciójáért felelős osztály
+	 */
 	public MapFactory() {
 		Logger.logCreate(this, "mapFactory");
 		spawnTiles = new ArrayList<Tile>();
 	}
 	
+	/**
+	 * Felépíti a pályát, amin a játék zajlik majd.
+	 * <p>
+	 * Létrehozza a pályát alkotó Tile objektumokat, és beállítja azok szomszédossági viszonyát.
+	 * Eltárolja a lehetséges kezdőpozíciókat.
+	 */
 	public void buildMap(){
 		Logger.logCall(this, "buildMap()");
 		Tile middleTile = new NormalTile();
@@ -38,6 +47,12 @@ public class MapFactory {
 		Logger.logReturn(this, "setFile()");
 	}
 	
+	/**
+	 * Visszaad egy olyan Tile objektumot, ami a Robot kezdőpozíciójául szolgálhat.
+	 * Ameddig tud, az előzőektől eltérő mezővel tér vissza
+	 * 
+	 * @return A kezdő mező.
+	 */
 	public Tile getNextSpawn(){
 		Logger.logCall(this, "getNextSpawn()");
 		Logger.logReturn(this, "spawnTiles.pop()");
