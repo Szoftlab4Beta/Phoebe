@@ -3,12 +3,14 @@ package szoftlab4Szkeleton;
 public class Goo extends Patch{
 
 	public Goo() {
-		// TODO Auto-generated constructor stub
+		Logger.logCreate(this, "Goo");
 	}
 	
 	@Override
-	public void accept(Robot robot) {
-		robot.collide(this);
+	public void accept(IColliding colliding) {
+		Logger.logCall(this, "accept()");
+		colliding.collide(this);
+		Logger.logReturn(this, "accept()");
 	}
 
 }
