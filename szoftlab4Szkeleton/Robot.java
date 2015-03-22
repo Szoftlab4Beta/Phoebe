@@ -16,13 +16,20 @@ public class Robot implements IColliding {
 	{
 		Logger.logCreate(this, "Robot", "(Tile spawnTile, int startGoo, int startOil)");
 		
-		if(spawnTile==null)
-			throw new IllegalArgumentException("Invalid spawn point. (Argument is null)");
+		try
+		{
+			if(spawnTile==null)
+				throw new IllegalArgumentException("Invalid spawn point. (Argument is null)");
 		
-		distance=new VectorClass();
-		Logger.logCreate(distance, Logger.getIDOf(this)+"_DistanceVector");
-		speed=new VectorClass();
-		Logger.logCreate(speed, Logger.getIDOf(this)+"_SpeedVector");
+			distance=new VectorClass();
+			Logger.logCreate(distance, Logger.getIDOf(this)+"_DistanceVector");
+			speed=new VectorClass();
+			Logger.logCreate(speed, Logger.getIDOf(this)+"_SpeedVector");
+		}
+		catch(Exception e)
+		{
+			Logger.logMSG(e.getMessage()+"\n");
+		}
 	}
 	
 	public void jump()
