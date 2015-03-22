@@ -21,7 +21,7 @@ public class Robot implements IColliding {
 		
 		Logger.logCall(this, "Robot(Tile spawnTile, int startGoo, int startOil)");
 		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("…rvÈnyes-e az Èledı mezı? (I/N):\t");
+		Logger.logMSG("√ârv√©nyes-e az √©led≈ë mez≈ë? (I/N):\t");
 		if(inputScanner.next().equalsIgnoreCase("n"))
 			throw new IllegalArgumentException("Invalid spawn point. (Argument is null)");
 		
@@ -38,11 +38,11 @@ public class Robot implements IColliding {
 		Logger.logCall(this, "jump()");
 		
 		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("A p·ly·n marad a robot? (I/N):\t");
+		Logger.logMSG("A p√°ly√°n marad a robot? (I/N):\t");
 		if(inputScanner.next().equalsIgnoreCase("i"))
 		{
 			Tile tempt;
-			Logger.logMSG("Milyen tÌpus˙ mezıre ugrik a robot? (Ragacs / Olaj / J·tÈkTÈrVÈge / CÈl / Norm·l):\t");
+			Logger.logMSG("Milyen t√≠pus√∫ mez≈ëre ugrik a robot? (Ragacs / Olaj / J√°t√©kT√©rV√©ge / C√©l / Norm√°l):\t");
 			String answer=inputScanner.next().toLowerCase();
 			if(answer.equals("ragacs"))
 			{
@@ -62,7 +62,7 @@ public class Robot implements IColliding {
 				
 				tempt.accept(this);
 			}
-			else if(answer.equals("j·tÈktÈrvÈge"))
+			else if(answer.equals("j√°t√©kt√©rv√©ge"))
 			{
 				Logger.disable();
 				tempt=new EndOfField();
@@ -70,7 +70,7 @@ public class Robot implements IColliding {
 				
 				tempt.accept(this);
 			}
-			else if(answer.equals("cÈl"))
+			else if(answer.equals("c√©l"))
 			{
 				Logger.disable();
 				tempt=new Finish();
@@ -78,7 +78,7 @@ public class Robot implements IColliding {
 				
 				tempt.accept(this);
 			}
-			else if(answer.equals("norm·l"))
+			else if(answer.equals("norm√°l"))
 			{
 				Logger.disable();
 				tempt=new NormalTile();
@@ -96,16 +96,16 @@ public class Robot implements IColliding {
 		Logger.logCall(this, "modifySpeed(Direction d)");
 		
 		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("Volt sebessÈgvektor megadva? (I/N):\t");
+		Logger.logMSG("Volt sebess√©gvektor megadva? (I/N):\t");
 		if(inputScanner.next().equalsIgnoreCase("i"))
 		{
-			Logger.logMSG("MÛdosÌthat-e sebessÈget? (I/N):\t");
+			Logger.logMSG("M√≥dos√≠that-e sebess√©get? (I/N):\t");
 			if(inputScanner.next().equalsIgnoreCase("i"))
 				speed.add(d);
 		}
 		else if(!inputScanner.next().equalsIgnoreCase("n"))
 		{
-			Logger.logMSG("…rvÈnytelen v·lasz!");
+			Logger.logMSG("√ârv√©nytelen v√°lasz!");
 		}
 		
 		Logger.logReturn(this, "modifySpeed(Direction d)");
@@ -116,7 +116,7 @@ public class Robot implements IColliding {
 		
 		Patch p = null;
 		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("Milyen folt hagy·sa? (Olaj / Ragacs / Semmilyen):\t");
+		Logger.logMSG("Milyen folt hagy√°sa? (Olaj / Ragacs / Semmilyen):\t");
 		String answer=inputScanner.next().toLowerCase();
 		if(answer.equals("olaj"))
 		{
@@ -133,11 +133,11 @@ public class Robot implements IColliding {
 		}
 		else
 		{
-			Logger.logMSG("…rvÈnytelen v·lasz!");
+			Logger.logMSG("√ârv√©nytelen v√°lasz!");
 			return;
 		}
 		
-		Logger.logMSG("Van-e ilyen folt a rakt·rban? (I/N):\t");
+		Logger.logMSG("Van-e ilyen folt a rakt√°rban? (I/N):\t");
 		if(inputScanner.next().equalsIgnoreCase("i"))
 		{
 			Logger.disable();
@@ -147,7 +147,7 @@ public class Robot implements IColliding {
 		}
 		else if(!inputScanner.next().equalsIgnoreCase("n"))
 		{
-			Logger.logMSG("…rvÈnytelen v·lasz!");
+			Logger.logMSG("√ârv√©nytelen v√°lasz!");
 		}
 		
 		Logger.logReturn(this, "placePatch(PatchType type)");
