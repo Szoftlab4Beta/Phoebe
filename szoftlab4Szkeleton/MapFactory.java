@@ -1,5 +1,6 @@
 package szoftlab4Szkeleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import szoftlab4Szkeleton.VectorClass.Direction;
@@ -10,6 +11,7 @@ public class MapFactory {
 
 	public MapFactory() {
 		Logger.logCreate(this, "mapFactory");
+		spawnTiles = new ArrayList<Tile>();
 	}
 	
 	public void buildMap(){
@@ -27,6 +29,7 @@ public class MapFactory {
 		westTile.setSide(Direction.East, middleTile);
 		middleTile.setSide(Direction.East, eastTile);
 		eastTile.setSide(Direction.West, middleTile);
+		spawnTiles.add(middleTile);
 		Logger.logReturn(this, "buildMap()");
 	}
 	
@@ -38,7 +41,7 @@ public class MapFactory {
 	public Tile getNextSpawn(){
 		Logger.logCall(this, "getNextSpawn()");
 		Logger.logReturn(this, "spawnTiles.pop()");
-		return null;
+		return spawnTiles.get(0);
 	}
 	
 }
