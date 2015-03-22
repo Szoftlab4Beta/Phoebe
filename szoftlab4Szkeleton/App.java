@@ -22,23 +22,23 @@ public class App {
 			Logger.logMSG("5 - Játék vége\n");
 			Logger.logMSG("6 - Robotok létrehozása, elhelyezése\n");
 			Scanner in = new Scanner(System.in);
-			switch (in.next()) {
-			case "1" :
+			switch (in.next().toLowerCase().charAt(0)) {
+			case '1' :
 				Game game1 = new Game();
 				break;
-			case "2" :
+			case '2' :
 				Logger.logMSG("Merre menjünk? (N - North, E - East, S - South, W - West) ");
-				switch (in.next().toLowerCase()) {
-				case "n" :
+				switch (in.next().toLowerCase().charAt(0)) {
+				case 'n' :
 					robot.modifySpeed(VectorClass.Direction.North);
 					break;
-				case "e" :
+				case 'e' :
 					robot.modifySpeed(VectorClass.Direction.East);
 					break;
-				case "s" :
+				case 's' :
 					robot.modifySpeed(VectorClass.Direction.South);
 					break;
-				case "w" :
+				case 'w' :
 					robot.modifySpeed(VectorClass.Direction.West);
 					break;
 				default :
@@ -46,16 +46,16 @@ public class App {
 					break;
 				}
 				break;
-			case "3" :
+			case '3' :
 				Logger.logMSG("Milyen foltot hagyna? (O - Olaj, R - Ragacs, S - Semmilyen) ");
-				switch (in.next().toLowerCase()) {
-				case "o" :
+				switch (in.next().toLowerCase().charAt(0)) {
+				case 'o' :
 					robot.placePatch(Patch.PatchType.Oil);
 					break;
-				case "r" :
+				case 'r' :
 					robot.placePatch(Patch.PatchType.Goo);
 					break;
-				case "s" :
+				case 's' :
 					robot.placePatch(Patch.PatchType.None);
 					break;
 				default :
@@ -63,20 +63,22 @@ public class App {
 					break;
 				}
 				break;
-			case "4" :
+			case '4' :
 				robot.jump();
 				break;
-			case "5" :
+			case '5' :
 				//TODO: testWinCondition()-t nem tudjuk meghívni :(
 				break;
-			case "6" :
+			case '6' :
 				Logger.logMSG("Legyen érvényes kezdőmező? (I - igen, N - nem");
-				switch (in.next().toLowerCase()) {
-				case "i" :
+				switch (in.next().toLowerCase().charAt(0)) {
+				case 'i' :
 					Robot robot1 = new Robot(spawnTile,1,0);
 					break;
-				default :
+				case 'n' :
 					Robot robot2 = new Robot(null,1,0);
+				default :
+					Logger.logMSG("Rossz bemenet!");
 					break;
 				}
 				break;
