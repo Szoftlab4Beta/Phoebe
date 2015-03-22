@@ -73,7 +73,7 @@ public class App {
 				//TODO: testWinCondition()-t nem tudjuk meghívni :(
 				break;
 			case '6' :
-				Logger.logMSG("Legyen érvényes kezdőmező? (I - igen, N - nem");
+				Logger.logMSG("Legyen érvényes kezdőmező? (I - igen, N - nem) ");
 				switch (in.next().toLowerCase().charAt(0)) {
 				case 'i' :
 					Robot robot1 = new Robot(spawnTile,1,0);

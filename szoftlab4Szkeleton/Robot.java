@@ -14,23 +14,15 @@ public class Robot implements IColliding {
 	
 	public Robot(Tile spawnTile, int startGoo, int startOil)
 	{
-		Logger.logCreate(this, "Robot");
+		Logger.logCreate(this, "Robot", "(Tile spawnTile, int startGoo, int startOil)");
 		
-		if(Logger.isDisabled())
-			return;
-		
-		Logger.logCall(this, "Robot(Tile spawnTile, int startGoo, int startOil)");
-		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("Érvényes-e az éledő mező? (I/N):\t");
-		if(inputScanner.next().equalsIgnoreCase("n"))
+		if(spawnTile==null)
 			throw new IllegalArgumentException("Invalid spawn point. (Argument is null)");
 		
 		distance=new VectorClass();
 		Logger.logCreate(distance, Logger.getIDOf(this)+"_DistanceVector");
 		speed=new VectorClass();
 		Logger.logCreate(speed, Logger.getIDOf(this)+"_SpeedVector");
-		
-		Logger.logReturn(this, "Robot(Tile spawnTile, int startGoo, int startOil)");
 	}
 	
 	public void jump()
@@ -39,30 +31,13 @@ public class Robot implements IColliding {
 		
 		Scanner inputScanner=new Scanner(System.in);
 		Logger.logMSG("A pályán marad a robot? (I/N):\t");
-		if(inputScanner.next().equalsIgnoreCase("i"))
+		String answer=inputScanner.next().toLowerCase();
+		if(answer.equals("i"))
 		{
 			Tile tempt;
-			Logger.logMSG("Milyen típusú mezőre ugrik a robot? (Ragacs / Olaj / JátékTérVége / Cél / Normál):\t");
-			String answer=inputScanner.next().toLowerCase();
-			if(answer.equals("ragacs"))
-			{
-				Logger.disable();
-				tempt=new NormalTile();
-				((NormalTile)tempt).setPatch(new Goo());
-				Logger.enable();
-				
-				tempt.accept(this);
-			}
-			else if(answer.equals("olaj"))
-			{
-				Logger.disable();
-				tempt=new NormalTile();
-				((NormalTile)tempt).setPatch(new Oil());
-				Logger.enable();
-				
-				tempt.accept(this);
-			}
-			else if(answer.equals("játéktérvége"))
+			Logger.logMSG("Milyen típusú mezőre ugrik a robot? (JátékTérVége / Cél / Normál):\t");
+			answer =inputScanner.next().toLowerCase();
+			if(answer.equals("játéktérvége"))
 			{
 				Logger.disable();
 				tempt=new EndOfField();
@@ -86,6 +61,14 @@ public class Robot implements IColliding {
 				
 				tempt.accept(this);
 			}
+			else
+			{
+				Logger.logMSG("Érvénytelen válasz!\n");
+			}
+		}
+		else if(!answer.equals("n"))
+		{
+			Logger.logMSG("Érvénytelen válasz!\n");
 		}
 		
 		Logger.logReturn(this, "jump()");
@@ -96,17 +79,12 @@ public class Robot implements IColliding {
 		Logger.logCall(this, "modifySpeed(Direction d)");
 		
 		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("Volt sebességvektor megadva? (I/N):\t");
-		if(inputScanner.next().equalsIgnoreCase("i"))
-		{
-			Logger.logMSG("Módosíthat-e sebességet? (I/N):\t");
-			if(inputScanner.next().equalsIgnoreCase("i"))
-				speed.add(d);
-		}
-		else if(!inputScanner.next().equalsIgnoreCase("n"))
-		{
-			Logger.logMSG("Érvénytelen válasz!");
-		}
+		Logger.logMSG("Módosíthat-e sebességet? (I/N):\t");
+		String answer=inputScanner.next().toLowerCase();
+		if(answer.equals("i"))
+			speed.add(d);
+		else if(!answer.equals("n"))
+			Logger.logMSG("Érvénytelen válasz!\n");
 		
 		Logger.logReturn(this, "modifySpeed(Direction d)");
 	}
@@ -114,40 +92,41 @@ public class Robot implements IColliding {
 	public void placePatch(PatchType type){
 		Logger.logCall(this, "placePatch(PatchType type)");
 		
-		Patch p = null;
-		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("Milyen folt hagyása? (Olaj / Ragacs / Semmilyen):\t");
-		String answer=inputScanner.next().toLowerCase();
-		if(answer.equals("olaj"))
+		if(type!=PatchType.None)
 		{
-			p=new Oil();
-		}
-		else if(answer.equals("ragacs"))
-		{
-			p=new Goo();
-		}
-		else if(answer.equals("semmilyen"))
-		{
-			Logger.logReturn(this, "placePatch(PatchType type)");
-			return;
-		}
-		else
-		{
-			Logger.logMSG("Érvénytelen válasz!");
-			return;
-		}
-		
-		Logger.logMSG("Van-e ilyen folt a raktárban? (I/N):\t");
-		if(inputScanner.next().equalsIgnoreCase("i"))
-		{
-			Logger.disable();
-			position=new NormalTile();
-			Logger.enable();
-			((NormalTile)position).setPatch(p);
-		}
-		else if(!inputScanner.next().equalsIgnoreCase("n"))
-		{
-			Logger.logMSG("Érvénytelen válasz!");
+			Scanner inputScanner=new Scanner(System.in);
+			Logger.logMSG("Van-e ilyen folt a raktárban? (I/N):\t");
+			String answer=inputScanner.next().toLowerCase();
+			if(answer.equals("i"))
+			{
+				Logger.disable();
+				position=new NormalTile();
+				Logger.enable();
+				Patch p=null;
+				switch(type)
+				{
+				case Goo:
+					Logger.disable();
+					p=new Goo();
+					Logger.enable();
+					break;
+				case Oil:
+					Logger.disable();
+					p=new Oil();
+					Logger.enable();
+					break;
+				case None:
+					//Ha ráugrik egy foltra, akkor az eltűnik?
+					break;
+				default:
+					break;
+				}
+				((NormalTile)position).setPatch(p);
+			}
+			else if(!answer.equals("n"))
+			{
+				Logger.logMSG("Érvénytelen válasz!\n");
+			}
 		}
 		
 		Logger.logReturn(this, "placePatch(PatchType type)");
@@ -187,6 +166,39 @@ public class Robot implements IColliding {
 	@Override
 	public void collide(NormalTile t) {
 		Logger.logCall(this, "collide(NormalTile t)");
+		
+		Scanner inputScanner=new Scanner(System.in);
+		Logger.logMSG("Van folt a mezőn? (I/N):\t");
+		String answer=inputScanner.next().toLowerCase();
+		if(answer.equals("i"))
+		{
+			Patch p;
+			Logger.logMSG("Milyen folt van a mezőn? (Ragacs / Olaj):\t");
+			answer=inputScanner.next().toLowerCase();
+			if(answer.equals("ragacs"))
+			{
+				Logger.disable();
+				p=new Goo();
+				Logger.enable();
+				p.accept(this);
+			}
+			else if(answer.equals("olaj"))
+			{
+				Logger.disable();
+				p=new Oil();
+				Logger.enable();
+				p.accept(this);
+			}
+			else
+			{
+				Logger.logMSG("Érvénytelen válasz!\n");
+			}
+		}
+		else if(!answer.equals("n"))
+		{
+			Logger.logMSG("Érvénytelen válasz!\n");
+		}
+		
 		Logger.logReturn(this, "collide(NormalTile t)");
 	}
 

@@ -10,7 +10,9 @@ public class Finish extends Tile{
 
 	@Override
 	public void accept(IColliding colliding) {
+		Logger.logCall(this, "accept()");
 		colliding.collide(this);
+		Logger.logReturn(this, "accept()");
 	}
 	
 }
