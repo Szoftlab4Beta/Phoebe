@@ -66,4 +66,8 @@ public class Logger {
 	public static void disable(){
 		disabled=true;
 	}
+	
+	public static boolean isDisabled(){
+		return disabled;
+	}
 }
