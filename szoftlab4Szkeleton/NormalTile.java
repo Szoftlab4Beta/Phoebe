@@ -9,7 +9,7 @@ public class NormalTile extends Tile {
 	}
 	
 	public void setPatch(Patch p){
-        Logger.logCall(this, "setPatch(" + p + ")");
+        Logger.logCall(this, "setPatch(" + Logger.getIDOf(p) + ")");
         Logger.logReturn(this, "setPatch()");
 		
 	}
