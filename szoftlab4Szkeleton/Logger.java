@@ -36,6 +36,12 @@ public class Logger {
 	}
 	
 	public static String getIDOf(Object object){
+		if(!IDs.containsKey(object))
+			throw new IllegalArgumentException("Logger doesn't contain this object");
 		return IDs.get(object);
+	}
+	
+	public static void logMSG(String msg){
+		System.out.println(indent + msg);
 	}
 }
