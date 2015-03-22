@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class App {
 
 	public App() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class App {
 				Game game1 = new Game();
 				break;
 			case '2' :
-				Logger.logMSG("Merre menjünk? (N - North, E - East, S - South, W - West) ");
+				Logger.logMSG("Merre menjünk? (N - North, E - East, S - South, W - West, V - Változatlan sebesség) ");
 				switch (in.next().toLowerCase().charAt(0)) {
 				case 'n' :
 					robot.modifySpeed(VectorClass.Direction.North);
@@ -40,6 +40,9 @@ public class App {
 					break;
 				case 'w' :
 					robot.modifySpeed(VectorClass.Direction.West);
+					break;
+				case 'v' :
+					robot.modifySpeed(VectorClass.Direction.None);
 					break;
 				default :
 					Logger.logMSG("Rossz bemenet!\n");
