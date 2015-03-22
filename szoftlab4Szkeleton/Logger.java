@@ -7,8 +7,12 @@ public class Logger {
 
 	static Map<Object, String> IDs = new HashMap<Object, String>();
 	static String indent = new String();
+	static boolean disabled=false;
 	
 	public static void logCreate(Object object, String name){
+		if(disabled)
+			return;
+		
 		int i;
 		for(i = 0; i < 10; i++){
 			if(!IDs.containsValue(name + "_" + i)){
@@ -22,6 +26,9 @@ public class Logger {
 	}
 	
 	public static void logCall(Object object, String msg){
+		if(disabled)
+			return;
+		
 		if(!IDs.containsKey(object))
 			throw new IllegalArgumentException("Logger doesn't contain this object");
 		System.out.println(indent + "->" + IDs.get(object) + "." + msg);
@@ -29,6 +36,9 @@ public class Logger {
 	}
 	
 	public static void logReturn(Object object, String msg){
+		if(disabled)
+			return;
+		
 		if(!IDs.containsKey(object))
 			throw new IllegalArgumentException("Logger doesn't contain this object");
 		indent = indent.substring(0, indent.length() - 1);
@@ -42,6 +52,17 @@ public class Logger {
 	}
 	
 	public static void logMSG(String msg){
-		System.out.print(indent + msg);
+		if(disabled)
+			return;
+		
+		System.out.print(indent + msg + "\t");
+	}
+	
+	public static void enable(){
+		disabled=false;
+	}
+	
+	public static void disable(){
+		disabled=true;
 	}
 }

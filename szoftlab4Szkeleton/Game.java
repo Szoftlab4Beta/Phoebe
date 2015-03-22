@@ -17,7 +17,7 @@ public class Game {
 	public Game() {
 		Logger.logMSG("########## SZKELETON ##########");
     	Logger.logMSG("");
-    	Logger.logMSG("Szeretnél játszani? (i/n):\t");
+    	Logger.logMSG("Szeretnél játszani? (i/n):");
     	
     	boolean run = false;
     	Scanner in = new Scanner(System.in);
@@ -26,11 +26,11 @@ public class Game {
     	}
     	
 		while (run) {
-			Logger.logMSG("Játékosok száma? (0-10):\t");
+			Logger.logMSG("Játékosok száma? (0-10):");
 			in = new Scanner(System.in);
 			playerNum = in.nextInt();
 			
-			Logger.logMSG("Körök száma? (0-10):\t");
+			Logger.logMSG("Körök száma? (0-10):");
 			in = new Scanner(System.in);
 			turns = in.nextInt();
 			
@@ -52,12 +52,12 @@ public class Game {
 				nextTurn();		
 				winner = testWinCondition();
 				
-				Logger.logMSG("Melyik robot nyert? (0-" + playerNum  + "), | -1 senki -> Játék vége | 0 senki, foyltatás:\t");
+				Logger.logMSG("Melyik robot nyert? (0-" + playerNum  + "), | -1 senki -> Játék vége | 0 senki, foyltatás:");
 				in = new Scanner(System.in);
 				winner = in.nextInt();
 			}
 			
-			Logger.logMSG("Szeretnél újat játszani? (i/n):\t");
+			Logger.logMSG("Szeretnél újat játszani? (i/n):");
 	    	run = false;
 	    	in = new Scanner(System.in);
 	    	if (in.next().toLowerCase() == "i") {
