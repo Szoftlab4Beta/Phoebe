@@ -10,9 +10,6 @@ public class Logger {
 	static boolean disabled=false;
 	
 	public static void logCreate(Object object, String name){
-		if(disabled)
-			return;
-		
 		int i;
 		for(i = 0; i < 10; i++){
 			if(!IDs.containsValue(name + "_" + i)){
@@ -22,6 +19,10 @@ public class Logger {
 		}
 		if(i == 10)
 			throw new IndexOutOfBoundsException("Can't have more than 10 of any instance");
+		
+		if(disabled)
+			return;
+		
 		System.out.println(indent + "-><<create>>" + name + "_" + i);
 	}
 	
@@ -55,7 +56,7 @@ public class Logger {
 		if(disabled)
 			return;
 		
-		System.out.print(indent + msg + "\t");
+		System.out.print(indent + msg);
 	}
 	
 	public static void enable(){
