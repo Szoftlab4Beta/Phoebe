@@ -42,6 +42,6 @@ public class Logger {
 	}
 	
 	public static void logMSG(String msg){
-		System.out.println(indent + msg);
+		System.out.print(indent + msg);
 	}
 }
