@@ -10,7 +10,7 @@ public class VectorClass {
 	public Map<Direction, Integer> vector;
 	
 	public VectorClass() {
-		Logger.logCreate(this, "VectorClass");
+		//a LogCreate-et a létrehozó objektum hívja
 	}
 	
 	public void add(Direction d){

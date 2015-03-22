@@ -9,8 +9,7 @@ public abstract class Tile implements IAcceptor{
 	Map<Direction, Tile> sides;
 	
 	public Tile() {
-        Logger.logCreate(this, "tile");
-		
+		//abstract osztálynak nem kell create???
 	}
 	
 	public void setSide(Direction d, Tile tile){
