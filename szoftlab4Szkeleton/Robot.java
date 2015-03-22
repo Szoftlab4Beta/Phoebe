@@ -35,9 +35,9 @@ public class Robot implements IColliding {
 		if(answer.equals("i"))
 		{
 			Tile tempt;
-			Logger.logMSG("Milyen típusú mezőre ugrik a robot? (JátékTérVége / Cél / Normál):\t");
+			Logger.logMSG("Milyen típusú mezőre ugrik a robot? (1-JátékTérVége / 2-Cél / 3-Normál):\t");
 			answer =inputScanner.next().toLowerCase();
-			if(answer.equals("játéktérvége"))
+			if(answer.equals("1"))
 			{
 				Logger.disable();
 				tempt=new EndOfField();
@@ -45,7 +45,7 @@ public class Robot implements IColliding {
 				
 				tempt.accept(this);
 			}
-			else if(answer.equals("cél"))
+			else if(answer.equals("2"))
 			{
 				Logger.disable();
 				tempt=new Finish();
@@ -53,7 +53,7 @@ public class Robot implements IColliding {
 				
 				tempt.accept(this);
 			}
-			else if(answer.equals("normál"))
+			else if(answer.equals("3"))
 			{
 				Logger.disable();
 				tempt=new NormalTile();
@@ -153,19 +153,19 @@ public class Robot implements IColliding {
 
 	@Override
 	public void collide(Oil t) {
-		Logger.logCall(this, "collide(Oil t)");
-		Logger.logReturn(this, "collide(Oil t)");
+		Logger.logCall(this, "collide(" + t + ")");
+		Logger.logReturn(this, "collide(" + t + ")");
 	}
 
 	@Override
 	public void collide(EndOfField t) {
-		Logger.logCall(this, "collide(EndOfField t)");
-		Logger.logReturn(this, "collide(EndOfField t)");
+		Logger.logCall(this, "collide(" + t + ")");
+		Logger.logReturn(this, "collide(" + t + ")");
 	}
 
 	@Override
 	public void collide(NormalTile t) {
-		Logger.logCall(this, "collide(NormalTile t)");
+		Logger.logCall(this, "collide(" + t + ")");
 		
 		Scanner inputScanner=new Scanner(System.in);
 		Logger.logMSG("Van folt a mezőn? (I/N):\t");
@@ -173,16 +173,16 @@ public class Robot implements IColliding {
 		if(answer.equals("i"))
 		{
 			Patch p;
-			Logger.logMSG("Milyen folt van a mezőn? (Ragacs / Olaj):\t");
+			Logger.logMSG("Milyen folt van a mezőn? (1-Ragacs / 2-Olaj):\t");
 			answer=inputScanner.next().toLowerCase();
-			if(answer.equals("ragacs"))
+			if(answer.equals("1"))
 			{
 				Logger.disable();
 				p=new Goo();
 				Logger.enable();
 				p.accept(this);
 			}
-			else if(answer.equals("olaj"))
+			else if(answer.equals("2"))
 			{
 				Logger.disable();
 				p=new Oil();
@@ -199,20 +199,20 @@ public class Robot implements IColliding {
 			Logger.logMSG("Érvénytelen válasz!\n");
 		}
 		
-		Logger.logReturn(this, "collide(NormalTile t)");
+		Logger.logReturn(this, "collide(" + t + ")");
 	}
 
 	@Override
 	public void collide(Goo t) {
-		Logger.logCall(this, "collide(Goo t)");
+		Logger.logCall(this, "collide(" + t + ")");
 		speed.halve();
-		Logger.logReturn(this, "collide(Goo t)");
+		Logger.logReturn(this, "collide(" + t + ")");
 	}
 
 	@Override
 	public void collide(Finish t) {
-		Logger.logCall(this, "collide(Finish t)");
-		Logger.logReturn(this, "collide(Finish t)");
+		Logger.logCall(this, "collide(" + t + ")");
+		Logger.logReturn(this, "collide(" + t + ")");
 	}
 	
 

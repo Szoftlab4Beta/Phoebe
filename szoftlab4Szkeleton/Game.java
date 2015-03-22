@@ -22,11 +22,6 @@ public class Game {
 	List<Robot> robots;
 	MapFactory mapFactory;
 	
-	public static void main(String [] args)
-	{
-		Game game = new Game();
-	}
-	
 	/**
 	 * Új játékot indít a newGame(int playerNum, int turns)-en keresztül.
 	 * Kommunikál a felhasználóval és az alapján vezérli a robotokat a setTurn,nextTurn-ön keresztül.
@@ -61,8 +56,8 @@ public class Game {
 			
 			newGame(playerNum, turns);	
 			
-			int winner = 0;	
-			while (winner == 0){
+			int winner = -1;	
+			while (winner == -1){
 				currentRobot = 1;
 				for (Robot element : robots) {
 					Logger.logMSG(currentRobot + "-es Robot van soron.");
