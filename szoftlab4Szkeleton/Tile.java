@@ -14,12 +14,14 @@ public abstract class Tile implements IAcceptor{
 	}
 	
 	public void setSide(Direction d, Tile tile){
-        Logger.logCall(this, "setSide(" + d + tile +")");
+        Logger.logCall(this, "setSide(" + d + Logger.getIDOf(tile) +")");
         Logger.logReturn(this, "setSide()");
 		
 	}
 	
 	public Tile getSide(Direction d){
+		Logger.logCall(this, "getSide(" + d + ")");
+		Logger.logReturn(this, d + " tile");
 		return null;
 	}
 
