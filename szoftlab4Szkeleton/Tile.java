@@ -13,7 +13,7 @@ public abstract class Tile implements IAcceptor{
 	}
 	
 	public void setSide(Direction d, Tile tile){
-        Logger.logCall(this, "setSide(" + d + Logger.getIDOf(tile) +")");
+        Logger.logCall(this, "setSide(" + d + " " + Logger.getIDOf(tile) +")");
         Logger.logReturn(this, "setSide()");
 		
 	}

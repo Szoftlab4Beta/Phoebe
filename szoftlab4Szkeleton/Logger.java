@@ -10,6 +10,10 @@ public class Logger {
 	static boolean disabled=false;
 	
 	public static void logCreate(Object object, String name){
+		logCreate(object, name, "");
+	}
+	
+	public static void logCreate(Object object, String name, String params){
 		int i;
 		for(i = 0; i < 10; i++){
 			if(!IDs.containsValue(name + "_" + i)){
@@ -23,7 +27,7 @@ public class Logger {
 		if(disabled)
 			return;
 		
-		System.out.println(indent + "-><<create>>" + name + "_" + i);
+		System.out.println(indent + "-><<create>>" + name + "_" + i + params);
 	}
 	
 	public static void logCall(Object object, String msg){
