@@ -1,5 +1,9 @@
 package szoftlab4Szkeleton;
 
+/**
+ * Egy speciális Folt(Patch) típus, jelen esetben egy olajcsfolt.
+ * Amint a robot a mezőre érkezik, elveszti sebességmódosító képességét.
+ */
 public class Oil extends Patch{
 
 	public Oil() {
