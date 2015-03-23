@@ -10,9 +10,6 @@ public class EndOfField extends Tile{
 		Logger.logCreate(this, "EndOfFiled");
 	}
 	
-	/**
-	 * A mező észleli ha rálépett a robot, a robot pedig ekkor meghal.
-	 */
 	@Override
 	public void accept(IColliding colliding) {
 		Logger.logCall(this, "accept()");
