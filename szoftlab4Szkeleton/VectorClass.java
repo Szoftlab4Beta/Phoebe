@@ -3,9 +3,9 @@ package szoftlab4Szkeleton;
 import java.util.Map;
 
 /**
- * A jÃ¡tÃ©kban egy irÃ¡nyvektort reprezentÃ¡lÃ³ osztÃ¡ly.
+ * A játékban egy irányvektort reprezentáló osztály.
  * <p>
- * Minden irÃ¡nyhoz tÃ¡rol egy lÃ©pÃ©sszÃ¡mot. Ezek Ã¶sszessÃ©ge adja meg a vektor irÃ¡nyÃ¡t Ã©s nagysÃ¡gÃ¡t.
+ * Minden irányhoz tárol egy lépésszámot. Ezek összessége adja meg a vektor irányát és nagyságát.
  * 
  */
 public class VectorClass {
@@ -15,16 +15,16 @@ public class VectorClass {
 	public Map<Direction, Integer> vector;
 	
 	public VectorClass() {
-		//a LogCreate-et a lÃ©trehozÃ³ objektum hÃ­vja
+		//a LogCreate-et a létrehozó objektum hívja
 	}
 	
 	/**
-	 * HozzÃ¡adja ehhez a vektorhoz a megadott irÃ¡nyt.
+	 * Hozzáadja ehhez a vektorhoz a megadott irányt.
 	 * <p>
-	 * Ha a vektornak mÃ¡r van ellentÃ©tes irÃ¡nyÃº komponense, akkor azt csÃ¶kkenti, 
-	 * egyÃ©bkÃ©nt a megadott irÃ¡nyÃº komponenst nÃ¶veli.
+	 * Ha a vektornak már van ellentétes irányú komponense, akkor azt csökkenti, 
+	 * egyébként a megadott irányú komponenst növeli.
 	 * 
-	 * @param d A vektorhoz adandÃ³ irÃ¡ny
+	 * @param d A vektorhoz adandó irány
 	 */
 	public void add(Direction d){
 		Logger.logCall(this, "add(" + d + ")");
@@ -32,11 +32,11 @@ public class VectorClass {
 	}
 	
 	/**
-	 * HozzÃ¡adja ehhez a vektorhoz a kapott vektort.
+	 * Hozzáadja ehhez a vektorhoz a kapott vektort.
 	 * <p>
-	 * A megadott vektor Ã¶sszes komponensÃ©t hozzÃ¡adja ehhez a vektorhoz.
+	 * A megadott vektor összes komponensét hozzáadja ehhez a vektorhoz.
 	 * 
-	 * @param v A hozzÃ¡adandÃ³ vektor.
+	 * @param v A hozzáadandó vektor.
 	 */
 	public void add(VectorClass v){
 		Logger.logCall(this, "add(" + Logger.getIDOf(v) + ")");
@@ -44,9 +44,9 @@ public class VectorClass {
 	}
 	
 	/**
-	 * Elfelezi a vektor mÃ©retÃ©t.
+	 * Elfelezi a vektor méretét.
 	 * <p>
-	 * A vektor Ã¶sszes komponensÃ©nek mÃ©retÃ©t felÃ©re csÃ¶kkenti.
+	 * A vektor összes komponensének méretét felére csökkenti.
 	 */
 	public void halve(){
 		Logger.logCall(this, "halve()");

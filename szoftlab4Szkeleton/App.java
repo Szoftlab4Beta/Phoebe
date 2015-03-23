@@ -14,20 +14,20 @@ public class App {
 			Tile spawnTile = new NormalTile();
 			Robot robot = new Robot(spawnTile,1,0);
 			Logger.enable();
-			Logger.logMSG("V√°lasszon lehet≈ës√©get:\n");
-			Logger.logMSG("1 - √öj j√°t√©k ind√≠t√°sa\n");
-			Logger.logMSG("2 - Sebess√©g be√°ll√≠t√°sa\n");
-			Logger.logMSG("3 - Folt hagy√°sa\n");
-			Logger.logMSG("4 - Ugr√°s\n");
-			Logger.logMSG("5 - J√°t√©k v√©ge\n");
-			Logger.logMSG("6 - Robotok l√©trehoz√°sa, elhelyez√©se\n");
+			Logger.logMSG("V·lasszon lehetısÈget:\n");
+			Logger.logMSG("1 - ⁄j j·tÈk indÌt·sa\n");
+			Logger.logMSG("2 - SebessÈg be·llÌt·sa\n");
+			Logger.logMSG("3 - Folt hagy·sa\n");
+			Logger.logMSG("4 - Ugr·s\n");
+			Logger.logMSG("5 - J·tÈk vÈge\n");
+			Logger.logMSG("6 - Robotok lÈtrehoz·sa, elhelyezÈse\n");
 			Scanner in = new Scanner(System.in);
 			switch (in.next().toLowerCase().charAt(0)) {
 			case '1' :
 				Game game1 = new Game();
 				break;
 			case '2' :
-				Logger.logMSG("Merre menj√ºnk? (N - North, E - East, S - South, W - West, V - V√°ltozatlan sebess√©g) ");
+				Logger.logMSG("Merre menj¸nk? (N - North, E - East, S - South, W - West, V - V·ltozatlan sebessÈg) ");
 				switch (in.next().toLowerCase().charAt(0)) {
 				case 'n' :
 					robot.modifySpeed(VectorClass.Direction.North);
@@ -70,10 +70,10 @@ public class App {
 				robot.jump();
 				break;
 			case '5' :
-				//TODO: testWinCondition()-t nem tudjuk megh√≠vni :(
+				//TODO: testWinCondition()-t nem tudjuk meghÌvni :(
 				break;
 			case '6' :
-				Logger.logMSG("Legyen √©rv√©nyes kezd≈ëmez≈ë? (I - igen, N - nem) ");
+				Logger.logMSG("Legyen ÈrvÈnyes kezdımezı? (I - igen, N - nem) ");
 				switch (in.next().toLowerCase().charAt(0)) {
 				case 'i' :
 					Robot robot1 = new Robot(spawnTile,1,0);

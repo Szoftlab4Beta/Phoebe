@@ -5,7 +5,7 @@ import java.util.Map;
 import szoftlab4Szkeleton.VectorClass.Direction;
 
 /**
- * NyilvÃ¡ntartja a szomszÃ©dos mezÅ‘ket, csere esetÃ©n pedig fenntartja a pÃ¡lya konzisztenciÃ¡jÃ¡t.
+ * Nyilvántartja a szomszédos mezõket, csere esetén pedig fenntartja a pálya konzisztenciáját.
  */
 public abstract class Tile implements IAcceptor{
 
@@ -15,7 +15,7 @@ public abstract class Tile implements IAcceptor{
 	}
 	
 	/**
-	 * BeÃ¡llÃ­tja a megadott d irÃ¡nyban lÃ©vÅ‘ szomszÃ©djÃ¡t a t paramÃ©terkÃ©nt kapott mezÅ‘re.
+	 * Beállítja a megadott d irányban lévõ szomszédját a t paraméterként kapott mezõre.
 	 * @param d
 	 * @param tile
 	 */
@@ -26,7 +26,7 @@ public abstract class Tile implements IAcceptor{
 	}
 	
 	/**
-	 * A paramÃ©terkÃ©nt kapott irÃ¡nyban lÃ©vÅ‘ mezÅ‘t adja vissza.
+	 * A paraméterként kapott irányban lévõ mezõt adja vissza.
 	 * @param d
 	 * @return Tile
 	 */

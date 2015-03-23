@@ -9,8 +9,8 @@ import szoftlab4Szkeleton.Patch.PatchType;
 import szoftlab4Szkeleton.VectorClass.Direction;
 
 /**
- * Az osztÃ¡ly elvÃ©gzi a program inicializÃ¡lÃ¡sÃ¡t, Ãºj jÃ¡tÃ©k indÃ­tÃ¡sÃ¡t valamint annak levezÃ©nylÃ©sÃ©t.
- * NyilvÃ¡ntartja a jÃ¡tÃ©kosok, robotok, eltelt kÃ¶rÃ¶k szÃ¡mÃ¡t valamint az egyÃ©b jÃ¡tÃ©kmenethez kÃ¶thetÅ‘ informÃ¡ciÃ³kat
+ * Az osztály elvégzi a program inicializálását, új játék indítását valamint annak levezénylését.
+ * Nyilvántartja a játékosok, robotok, eltelt körök számát valamint az egyéb játékmenethez köthetõ információkat
  */
 public class Game {
 
@@ -22,9 +22,9 @@ public class Game {
 	MapFactory mapFactory;
 	
 	/**
-	 * Ãšj jÃ¡tÃ©kot indÃ­t a newGame(int playerNum, int turns)-en keresztÃ¼l.
-	 * KommunikÃ¡l a felhasznÃ¡lÃ³val Ã©s az alapjÃ¡n vezÃ©rli a robotokat a setTurn,nextTurn-Ã¶n keresztÃ¼l.
-	 * KÃ¶r vÃ©gÃ©n lekÃ©rdezi nyert-e valaki a testWinCondition()-en keresztÃ¼l Ã©s az alapjÃ¡n jÃ¡r el.
+	 * Új játékot indít a newGame(int playerNum, int turns)-en keresztül.
+	 * Kommunikál a felhasználóval és az alapján vezérli a robotokat a setTurn,nextTurn-ön keresztül.
+	 * Kör végén lekérdezi nyert-e valaki a testWinCondition()-en keresztül és az alapján jár el.
 	 */
 	public Game() {
 		Logger.logCreate(this, "game");
@@ -88,9 +88,9 @@ public class Game {
 		
 	
 	/**
-	 * Ãšj jÃ¡tÃ©kot indÃ­t. BeÃ¡llÃ­tja a maximÃ¡lisan megengedett kÃ¶rÃ¶k szÃ¡mÃ¡t (turns), 
-	 * jÃ¡tÃ©kosok szÃ¡mÃ¡t (playerNum), majd lÃ©trehozza az azokhoz tartozÃ³ robotokat, 
-	 * valamint betÃ¶lteti Ã©s inicializÃ¡ltatja a pÃ¡lyÃ¡t a mapFactory objektummal.
+	 * Új játékot indít. Beállítja a maximálisan megengedett körök számát (turns), 
+	 * játékosok számát (playerNum), majd létrehozza az azokhoz tartozó robotokat, 
+	 * valamint betölteti és inicializáltatja a pályát a mapFactory objektummal.
 	 * @param playerNum
 	 * @param turns
 	 */
@@ -109,8 +109,8 @@ public class Game {
 	
 	
 	/**
-	 * A jelenleg soronlÃ©vÅ‘ robot sebessÃ©gÃ©nek mÃ³dosÃ­tÃ¡sa Ã©s a lerakandÃ³ folt tÃ­pusÃ¡nak
-	 * beÃ¡llÃ­tÃ¡sa, annak modifySpeed Ã©s placePatch nevÅ± fÃ¼ggvÃ©nyeinek meghÃ­vÃ¡sÃ¡val.
+	 * A jelenleg soronlévõ robot sebességének módosítása és a lerakandó folt típusának
+	 * beállítása, annak modifySpeed és placePatch nevû függvényeinek meghívásával.
 	 * @param d
 	 * @param type
 	 */
@@ -127,8 +127,8 @@ public class Game {
 	
 	
 	/**
-	 * VÃ©grehajtja a robotok setTurn-el elÅ‘re beÃ¡llÃ­tott lÃ©pÃ©seit (MozgÃ¡s, Folt hagyÃ¡sa)
-	 * Az Ã¶sszes robotra lefut.
+	 * Végrehajtja a robotok setTurn-el elõre beállított lépéseit (Mozgás, Folt hagyása)
+	 * Az összes robotra lefut.
 	 */
 	void nextTurn(){
 		Logger.logCall(this, "nextTurn()");
@@ -141,10 +141,10 @@ public class Game {
 	
 	
 	/**
-	 * EllenÅ‘rzi hogy vÃ©get Ã©rt-e a jÃ¡tÃ©k.
-	 * Amennyiben mÃ¡r vÃ©ge a jÃ¡tÃ©kidÅ‘nek (utolsÃ³ kÃ¶r is lement) a megtett Ãºt alapjÃ¡n dÃ¶nt a nyertesrÅ‘l,
-	 * a legtÃ¶bb utat megtett robot nyer.
-	 * Ezen kÃ­vÃ¼l ellenÅ‘rzi, majd szÃ¼ksÃ©g esetÃ©n tÃ¶rli az aktÃ­v robotok listÃ¡jÃ¡rÃ³l a kÃ¶rben meghalt robotokat.
+	 * Ellenõrzi hogy véget ért-e a játék.
+	 * Amennyiben már vége a játékidõnek (utolsó kör is lement) a megtett út alapján dönt a nyertesrõl,
+	 * a legtöbb utat megtett robot nyer.
+	 * Ezen kívül ellenõrzi, majd szükség esetén törli az aktív robotok listájáról a körben meghalt robotokat.
 	 * @return int (-1|0|index) ahol az index a nyert robot indexe.
 	 */
 	int testWinCondition(){

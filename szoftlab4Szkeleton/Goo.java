@@ -1,8 +1,8 @@
 package szoftlab4Szkeleton;
 
 /**
- * Egy speciÃ¡lis Folt(Patch) tÃ­pus, jelen esetben egy ragacsfolt.
- * Amint a robot a mezÅ‘re Ã©rkezik, elveszti sebessÃ©gÃ©nek felÃ©t.
+ * Egy speciális Folt(Patch) típus, jelen esetben egy ragacsfolt.
+ * Amint a robot a mezõre érkezik, elveszti sebességének felét.
  */
 public class Goo extends Patch{
 

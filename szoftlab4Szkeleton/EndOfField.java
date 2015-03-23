@@ -1,8 +1,8 @@
 package szoftlab4Szkeleton;
 
 /**
- * Egy speci√°lis mez≈ë(Tile) t√≠pus, 
- * mely jelenleg a p√°lya sz√©leit reprezent√°lja.
+ * Egy speci·lis mezı(Tile) tÌpus, 
+ * mely jelenleg a p·lya szÈleit reprezent·lja.
  */
 public class EndOfField extends Tile{
 

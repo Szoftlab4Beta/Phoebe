@@ -1,7 +1,7 @@
 package szoftlab4Szkeleton;
 
 /**
- * √Åltal√°nos folt objektum, feladata a Foltok(Patchek) egys√©gbe z√°r√°sa.
+ * ¡ltal·nos folt objektum, feladata a Foltok(Patchek) egysÈgbe z·r·sa.
  */
 public abstract class Patch implements IAcceptor{
 
