@@ -1,10 +1,9 @@
 package szoftlab4Szkeleton;
 
 /**
- * Egy speciális mező (Tile) típus, 
+ * Egy speciális mező(Tile) típus, 
  * mely jelenleg a pálya széleit reprezentálja.
  */
-
 public class EndOfField extends Tile{
 
 	public EndOfField() {
