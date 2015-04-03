@@ -10,7 +10,7 @@ public class MapFactory {
 	List<Tile> spawnTiles;
 
 	/**
-	 * A p·lya felÈpÌtÈsÈÈrt, Ès a Robotok kezdıpozÌciÛj·Èrt felelıs oszt·ly
+	 * A p√°lya fel√©p√≠t√©s√©√©rt, √©s a Robotok kezd≈ëpoz√≠ci√≥j√°√©rt felel≈ës oszt√°ly
 	 */
 	public MapFactory() {
 		Logger.logCreate(this, "mapFactory");
@@ -18,10 +18,10 @@ public class MapFactory {
 	}
 	
 	/**
-	 * FelÈpÌti a p·ly·t, amin a j·tÈk zajlik majd.
+	 * Fel√©p√≠ti a p√°ly√°t, amin a j√°t√©k zajlik majd.
 	 * <p>
-	 * LÈtrehozza a p·ly·t alkotÛ Tile objektumokat, Ès be·llÌtja azok szomszÈdoss·gi viszony·t.
-	 * Elt·rolja a lehetsÈges kezdıpozÌciÛkat.
+	 * L√©trehozza a p√°ly√°t alkot√≥ Tile objektumokat, √©s be√°ll√≠tja azok szomsz√©doss√°gi viszony√°t.
+	 * Elt√°rolja a lehets√©ges kezd≈ëpoz√≠ci√≥kat.
 	 */
 	public void buildMap(){
 		Logger.logCall(this, "buildMap()");
@@ -48,10 +48,10 @@ public class MapFactory {
 	}
 	
 	/**
-	 * Visszaad egy olyan Tile objektumot, ami a Robot kezdıpozÌciÛj·ul szolg·lhat.
-	 * Ameddig tud, az elızıektıl eltÈrı mezıvel tÈr vissza
+	 * Visszaad egy olyan Tile objektumot, ami a Robot kezd≈ëpoz√≠ci√≥j√°ul szolg√°lhat.
+	 * Ameddig tud, az el≈ëz≈ëekt≈ël elt√©r≈ë mez≈ëvel t√©r vissza
 	 * 
-	 * @return A kezdı mezı.
+	 * @return A kezd≈ë mez≈ë.
 	 */
 	public Tile getNextSpawn(){
 		Logger.logCall(this, "getNextSpawn()");

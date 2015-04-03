@@ -13,15 +13,15 @@ public class Robot implements IColliding {
 	VectorClass speed, distance;
 	
 	/**
-	 * Beállítja a robot kezdõállapotát.
-	 * Beállítja a ragacs- és olajkészletét, pozícióját,
-	 * valamint inicializálja a távolság és sebességvektorait.
+	 * BeÃ¡llÃ­tja a robot kezdÅ‘Ã¡llapotÃ¡t.
+	 * BeÃ¡llÃ­tja a ragacs- Ã©s olajkÃ©szletÃ©t, pozÃ­ciÃ³jÃ¡t,
+	 * valamint inicializÃ¡lja a tÃ¡volsÃ¡g Ã©s sebessÃ©gvektorait.
 	 * <p>
-	 * Amennyiben a spawnTile paramétereként null-t kap, IllegalArgumentException-t dob.
+	 * Amennyiben a spawnTile paramÃ©terekÃ©nt null-t kap, IllegalArgumentException-t dob.
 	 * 
-	 * @param spawnTile Az a mezõ, amelyrõl a robot elindul
-	 * @param startGoo A játék kezdetekor a robot számára rendelkezésre álló ragacskészlet
-	 * @param startOil A játék kezdetekor a robot számára rendelkezésre álló olajkészlet
+	 * @param spawnTile Az a mezÅ‘, amelyrÅ‘l a robot elindul
+	 * @param startGoo A jÃ¡tÃ©k kezdetekor a robot szÃ¡mÃ¡ra rendelkezÃ©sre Ã¡llÃ³ ragacskÃ©szlet
+	 * @param startOil A jÃ¡tÃ©k kezdetekor a robot szÃ¡mÃ¡ra rendelkezÃ©sre Ã¡llÃ³ olajkÃ©szlet
 	 */
 	public Robot(Tile spawnTile, int startGoo, int startOil)
 	{
@@ -44,26 +44,26 @@ public class Robot implements IColliding {
 	}
 	
 	/**
-	 * A robot mozgatását végzi annak position és speed attribútumainak felhasználásával.
-	 * A jelenlegi pozícióról mezõnként halad a sebességvektor szerint egészen addig,
-	 * amíg meg nem tette az annak megfelelõ távolságot, vagy nem került ki a pályán kívülre.
+	 * A robot mozgatÃ¡sÃ¡t vÃ©gzi annak position Ã©s speed attribÃºtumainak felhasznÃ¡lÃ¡sÃ¡val.
+	 * A jelenlegi pozÃ­ciÃ³rÃ³l mezÅ‘nkÃ©nt halad a sebessÃ©gvektor szerint egÃ©szen addig,
+	 * amÃ­g meg nem tette az annak megfelelÅ‘ tÃ¡volsÃ¡got, vagy nem kerÃ¼lt ki a pÃ¡lyÃ¡n kÃ­vÃ¼lre.
 	 * <p>
-	 * Abban az esetben, ha a robot a pályáról letért a haladás közben, beállítja a dead változóját,
-	 * ezzel jelezve, hogy nem vehet részt a jelenlegi játék további köreiben.
-	 * Az ugrás utáni új pozíciót elérve az alatta lévõ mezõ típusától függõen viselkedik.
-	 * Sikeres ugrást követõen növeli a robot által összesen megtett távolságot.
+	 * Abban az esetben, ha a robot a pÃ¡lyÃ¡rÃ³l letÃ©rt a haladÃ¡s kÃ¶zben, beÃ¡llÃ­tja a dead vÃ¡ltozÃ³jÃ¡t,
+	 * ezzel jelezve, hogy nem vehet rÃ©szt a jelenlegi jÃ¡tÃ©k tovÃ¡bbi kÃ¶reiben.
+	 * Az ugrÃ¡s utÃ¡ni Ãºj pozÃ­ciÃ³t elÃ©rve az alatta lÃ©vÅ‘ mezÅ‘ tÃ­pusÃ¡tÃ³l fÃ¼ggÅ‘en viselkedik.
+	 * Sikeres ugrÃ¡st kÃ¶vetÅ‘en nÃ¶veli a robot Ã¡ltal Ã¶sszesen megtett tÃ¡volsÃ¡got.
 	 */
 	public void jump()
 	{
 		Logger.logCall(this, "jump()");
 		
 		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("A pályán marad a robot? (I/N):\t");
+		Logger.logMSG("A pÃ¡lyÃ¡n marad a robot? (I/N):\t");
 		String answer=inputScanner.next().toLowerCase();
 		if(answer.equals("i"))
 		{
 			Tile tempt;
-			Logger.logMSG("Milyen típusú mezõre ugrik a robot? (1-JátékTérVége / 2-Cél / 3-Normál):\t");
+			Logger.logMSG("Milyen tÃ­pusÃº mezÅ‘re ugrik a robot? (1-JÃ¡tÃ©kTÃ©rVÃ©ge / 2-CÃ©l / 3-NormÃ¡l):\t");
 			answer =inputScanner.next().toLowerCase();
 			if(answer.equals("1"))
 			{
@@ -91,47 +91,47 @@ public class Robot implements IColliding {
 			}
 			else
 			{
-				Logger.logMSG("Érvénytelen válasz!\n");
+				Logger.logMSG("Ã‰rvÃ©nytelen vÃ¡lasz!\n");
 			}
 		}
 		else if(!answer.equals("n"))
 		{
-			Logger.logMSG("Érvénytelen válasz!\n");
+			Logger.logMSG("Ã‰rvÃ©nytelen vÃ¡lasz!\n");
 		}
 		
 		Logger.logReturn(this, "jump()");
 	}
 	
 	/**
-	 * A robot sebességét módosítja a megadott irány szerint.
-	 * Abban az esetben, ha paraméterként Direction.None volt megadva és/vagy nem módosíthatja a sebességét,
-	 * nem történik sebességváltoztatás.
+	 * A robot sebessÃ©gÃ©t mÃ³dosÃ­tja a megadott irÃ¡ny szerint.
+	 * Abban az esetben, ha paramÃ©terkÃ©nt Direction.None volt megadva Ã©s/vagy nem mÃ³dosÃ­thatja a sebessÃ©gÃ©t,
+	 * nem tÃ¶rtÃ©nik sebessÃ©gvÃ¡ltoztatÃ¡s.
 	 * 
-	 * @param d Az az irány, amelynek egységvektorával módosítani kívánjuk a robot sebességét
+	 * @param d Az az irÃ¡ny, amelynek egysÃ©gvektorÃ¡val mÃ³dosÃ­tani kÃ­vÃ¡njuk a robot sebessÃ©gÃ©t
 	 */
 	public void modifySpeed(Direction d)
 	{
 		Logger.logCall(this, "modifySpeed(Direction d)");
 		
 		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("Módosíthat-e sebességet? (I/N):\t");
+		Logger.logMSG("MÃ³dosÃ­that-e sebessÃ©get? (I/N):\t");
 		String answer=inputScanner.next().toLowerCase();
 		if(answer.equals("i"))
 			speed.add(d);
 		else if(!answer.equals("n"))
-			Logger.logMSG("Érvénytelen válasz!\n");
+			Logger.logMSG("Ã‰rvÃ©nytelen vÃ¡lasz!\n");
 		
 		Logger.logReturn(this, "modifySpeed(Direction d)");
 	}
 	
 	/**
-	 * Lehelyez a robot alatti mezõre egy a paraméterében megadott típusú foltot.
-	 * Nem történik foltlerakás, amennyiben a típusnak megfelelõ foltból kifogyott a készlet.
+	 * Lehelyez a robot alatti mezÅ‘re egy a paramÃ©terÃ©ben megadott tÃ­pusÃº foltot.
+	 * Nem tÃ¶rtÃ©nik foltlerakÃ¡s, amennyiben a tÃ­pusnak megfelelÅ‘ foltbÃ³l kifogyott a kÃ©szlet.
 	 * <p>
-	 * Amennyiben a mezõn már volt folt, és a lerakandó folt típusa nem PatchType.None,
-	 * a mezõn lévõ folt a lerakandó folt típusára változik.
+	 * Amennyiben a mezÅ‘n mÃ¡r volt folt, Ã©s a lerakandÃ³ folt tÃ­pusa nem PatchType.None,
+	 * a mezÅ‘n lÃ©vÅ‘ folt a lerakandÃ³ folt tÃ­pusÃ¡ra vÃ¡ltozik.
 	 * 
-	 * @param type A robot alatti mezõre helyezendõ folt típusa
+	 * @param type A robot alatti mezÅ‘re helyezendÅ‘ folt tÃ­pusa
 	 */
 	public void placePatch(PatchType type){
 		Logger.logCall(this, "placePatch(PatchType type)");
@@ -139,7 +139,7 @@ public class Robot implements IColliding {
 		if(type!=PatchType.None)
 		{
 			Scanner inputScanner=new Scanner(System.in);
-			Logger.logMSG("Van-e ilyen folt a raktárban? (I/N):\t");
+			Logger.logMSG("Van-e ilyen folt a raktÃ¡rban? (I/N):\t");
 			String answer=inputScanner.next().toLowerCase();
 			if(answer.equals("i"))
 			{
@@ -168,7 +168,7 @@ public class Robot implements IColliding {
 			}
 			else if(!answer.equals("n"))
 			{
-				Logger.logMSG("Érvénytelen válasz!\n");
+				Logger.logMSG("Ã‰rvÃ©nytelen vÃ¡lasz!\n");
 			}
 		}
 		
@@ -176,11 +176,11 @@ public class Robot implements IColliding {
 	}
 	
 	/**
-	 * Visszaadja a jelenlegi játék alatt a robot által megtett össztávolságot mezõkben.
+	 * Visszaadja a jelenlegi jÃ¡tÃ©k alatt a robot Ã¡ltal megtett Ã¶ssztÃ¡volsÃ¡got mezÅ‘kben.
 	 * <p>
-	 * A távolság a robot distance attribútumában található irányokhoz rendelt számok összeadásával számolódik ki.
+	 * A tÃ¡volsÃ¡g a robot distance attribÃºtumÃ¡ban talÃ¡lhatÃ³ irÃ¡nyokhoz rendelt szÃ¡mok Ã¶sszeadÃ¡sÃ¡val szÃ¡molÃ³dik ki.
 	 * 
-	 * @return A robot által megtett távolság mezõkben mérve
+	 * @return A robot Ã¡ltal megtett tÃ¡volsÃ¡g mezÅ‘kben mÃ©rve
 	 */
 	public int getDistance(){
 		Logger.logCall(this, "getDistance()");
@@ -190,7 +190,7 @@ public class Robot implements IColliding {
 	}
 	
 	/**
-	 * Visszadja, hogy a robot halott-e, azaz kiesett a játékból vagy sem.
+	 * Visszadja, hogy a robot halott-e, azaz kiesett a jÃ¡tÃ©kbÃ³l vagy sem.
 	 * 
 	 * @return A robot halott-e
 	 */
@@ -202,9 +202,9 @@ public class Robot implements IColliding {
 	
 	
 	/**
-	 * Visszadja, hogy a robot célmezõn van-e.
+	 * Visszadja, hogy a robot cÃ©lmezÅ‘n van-e.
 	 * 
-	 * @return A robot célmezõn van-e
+	 * @return A robot cÃ©lmezÅ‘n van-e
 	 */
 	public boolean isAtFinish(){
 		Logger.logCall(this, "isAtFinish()");
@@ -214,10 +214,10 @@ public class Robot implements IColliding {
 	
 	
 	/**
-	 * Meghatározza, hogy mi történik abban az esetben, ha a robot olyan mezõre lépett, amelyen olajfolt van.
-	 * Beállítja a robot megfelelõ attribútumát úgy, hogy a robot ne tudja a következõ körben a sebességét módosítani.
+	 * MeghatÃ¡rozza, hogy mi tÃ¶rtÃ©nik abban az esetben, ha a robot olyan mezÅ‘re lÃ©pett, amelyen olajfolt van.
+	 * BeÃ¡llÃ­tja a robot megfelelÅ‘ attribÃºtumÃ¡t Ãºgy, hogy a robot ne tudja a kÃ¶vetkezÅ‘ kÃ¶rben a sebessÃ©gÃ©t mÃ³dosÃ­tani.
 	 * 
-	 * @param t Az az Oil típusú objektum, amely a robot ezen metódusát hívta a Visitor pattern szerint
+	 * @param t Az az Oil tÃ­pusÃº objektum, amely a robot ezen metÃ³dusÃ¡t hÃ­vta a Visitor pattern szerint
 	 */
 	@Override
 	public void collide(Oil t) {
@@ -226,10 +226,10 @@ public class Robot implements IColliding {
 	}
 	
 	/**
-	 * Meghatározza, hogy mi történik abban az esetben, ha a robot EndOfField típusú (pályához nem tartozó) mezõre lépett.
-	 * Beállítja a robot dead attribútumát true-ra, ezzel jelezve hogy kiesett a játékból.
+	 * MeghatÃ¡rozza, hogy mi tÃ¶rtÃ©nik abban az esetben, ha a robot EndOfField tÃ­pusÃº (pÃ¡lyÃ¡hoz nem tartozÃ³) mezÅ‘re lÃ©pett.
+	 * BeÃ¡llÃ­tja a robot dead attribÃºtumÃ¡t true-ra, ezzel jelezve hogy kiesett a jÃ¡tÃ©kbÃ³l.
 	 * 
-	 * @param t Az az EndOfField típusú objektum, amely a robot ezen metódusát hívta a Visitor pattern szerint
+	 * @param t Az az EndOfField tÃ­pusÃº objektum, amely a robot ezen metÃ³dusÃ¡t hÃ­vta a Visitor pattern szerint
 	 */
 	@Override
 	public void collide(EndOfField t) {
@@ -238,25 +238,25 @@ public class Robot implements IColliding {
 	}
 	
 	/**
-	 * Meghatározza, hogy mi történik abban az esetben, ha a robot NormalTile típusú mezõre lépett.
+	 * MeghatÃ¡rozza, hogy mi tÃ¶rtÃ©nik abban az esetben, ha a robot NormalTile tÃ­pusÃº mezÅ‘re lÃ©pett.
 	 * <p>
-	 * Attól függõen, hogy a mezõn van-e valamilyen folt, továbbhív a mezõnlévõ folton a Visitor mintának megfelelõen.
-	 * Ez fogja majd eldönteni hogy mi történik a mezõre lépés következtében.
-	 * Abban az esetben, ha a mezõn nincs folt, a függvény mindenféle állapotváltoztatás nélkül visszatér.
+	 * AttÃ³l fÃ¼ggÅ‘en, hogy a mezÅ‘n van-e valamilyen folt, tovÃ¡bbhÃ­v a mezÅ‘nlÃ©vÅ‘ folton a Visitor mintÃ¡nak megfelelÅ‘en.
+	 * Ez fogja majd eldÃ¶nteni hogy mi tÃ¶rtÃ©nik a mezÅ‘re lÃ©pÃ©s kÃ¶vetkeztÃ©ben.
+	 * Abban az esetben, ha a mezÅ‘n nincs folt, a fÃ¼ggvÃ©ny mindenfÃ©le Ã¡llapotvÃ¡ltoztatÃ¡s nÃ©lkÃ¼l visszatÃ©r.
 	 * 
-	 * @param t Az a NormalTile típusú objektum, amely a robot ezen metódusát hívta a Visitor pattern szerint
+	 * @param t Az a NormalTile tÃ­pusÃº objektum, amely a robot ezen metÃ³dusÃ¡t hÃ­vta a Visitor pattern szerint
 	 */
 	@Override
 	public void collide(NormalTile t) {
 		Logger.logCall(this, "collide(" + Logger.getIDOf(t) + ")");
 		
 		Scanner inputScanner=new Scanner(System.in);
-		Logger.logMSG("Van folt a mezõn? (I/N):\t");
+		Logger.logMSG("Van folt a mezÅ‘n? (I/N):\t");
 		String answer=inputScanner.next().toLowerCase();
 		if(answer.equals("i"))
 		{
 			Patch p;
-			Logger.logMSG("Milyen folt van a mezõn? (1-Ragacs / 2-Olaj):\t");
+			Logger.logMSG("Milyen folt van a mezÅ‘n? (1-Ragacs / 2-Olaj):\t");
 			answer=inputScanner.next().toLowerCase();
 			if(answer.equals("1"))
 			{
@@ -274,22 +274,22 @@ public class Robot implements IColliding {
 			}
 			else
 			{
-				Logger.logMSG("Érvénytelen válasz!\n");
+				Logger.logMSG("Ã‰rvÃ©nytelen vÃ¡lasz!\n");
 			}
 		}
 		else if(!answer.equals("n"))
 		{
-			Logger.logMSG("Érvénytelen válasz!\n");
+			Logger.logMSG("Ã‰rvÃ©nytelen vÃ¡lasz!\n");
 		}
 		
 		Logger.logReturn(this, "collide(" + Logger.getIDOf(t) + ")");
 	}
 	
 	/**
-	 * Meghatározza, hogy mi történik abban az esetben, ha a robot olyan mezõre lépett, amelyen ragacsfolt van.
-	 * A robot sebességvektorát lefelezi a speed attribútum megfelelõ függvényének meghívásával.
+	 * MeghatÃ¡rozza, hogy mi tÃ¶rtÃ©nik abban az esetben, ha a robot olyan mezÅ‘re lÃ©pett, amelyen ragacsfolt van.
+	 * A robot sebessÃ©gvektorÃ¡t lefelezi a speed attribÃºtum megfelelÅ‘ fÃ¼ggvÃ©nyÃ©nek meghÃ­vÃ¡sÃ¡val.
 	 * 
-	 * @param t Az a Goo típusú objektum, amely a robot ezen metódusát hívta a Visitor pattern szerint
+	 * @param t Az a Goo tÃ­pusÃº objektum, amely a robot ezen metÃ³dusÃ¡t hÃ­vta a Visitor pattern szerint
 	 */
 	@Override
 	public void collide(Goo t) {
@@ -299,10 +299,10 @@ public class Robot implements IColliding {
 	}
 	
 	/**
-	 * Meghatározza, hogy mi történik abban az esetben, ha a robot Finish típusú mezõre (célmezõre) lépett.
-	 * Beállítja true-ra a robot azon attribútumát, amely jelzi, hogy a robot célmezõn tartózkodik.
+	 * MeghatÃ¡rozza, hogy mi tÃ¶rtÃ©nik abban az esetben, ha a robot Finish tÃ­pusÃº mezÅ‘re (cÃ©lmezÅ‘re) lÃ©pett.
+	 * BeÃ¡llÃ­tja true-ra a robot azon attribÃºtumÃ¡t, amely jelzi, hogy a robot cÃ©lmezÅ‘n tartÃ³zkodik.
 	 * 
-	 * @param t Az a Finish típusú objektum, amely a robot ezen metódusát hívta a Visitor pattern szerint
+	 * @param t Az a Finish tÃ­pusÃº objektum, amely a robot ezen metÃ³dusÃ¡t hÃ­vta a Visitor pattern szerint
 	 */
 	@Override
 	public void collide(Finish t) {

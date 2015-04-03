@@ -1,8 +1,8 @@
 package szoftlab4Szkeleton;
 
 /**
- * Ez egy ·ltal·nos mezı objektum  amire ugorhat a robot.
- * Erre ker¸lnek r· a k¸lˆnfÈle foltok, Goo, Oil (Ragacs,Olaj)
+ * Ez egy √°ltal√°nos mez≈ë objektum  amire ugorhat a robot.
+ * Erre ker√ºlnek r√° a k√ºl√∂nf√©le foltok, Goo, Oil (Ragacs,Olaj)
  */
 public class NormalTile extends Tile {
 
@@ -13,7 +13,7 @@ public class NormalTile extends Tile {
 	}
 	
 	/**
-	 * Be·llÌtja a mezın lÈvı foltot a paramÈterben kapott foltra.
+	 * Be√°ll√≠tja a mez≈ën l√©v≈ë foltot a param√©terben kapott foltra.
 	 * @param p
 	 */
 	public void setPatch(Patch p){
@@ -23,7 +23,7 @@ public class NormalTile extends Tile {
 	}
 	
 	/**
-	 * Visszaadja a mezın lÈvı foltot, vagy ha nincs akkor null-t.
+	 * Visszaadja a mez≈ën l√©v≈ë foltot, vagy ha nincs akkor null-t.
 	 * @return
 	 */
 	public Patch getPatch(){
