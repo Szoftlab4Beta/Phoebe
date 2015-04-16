@@ -25,6 +25,8 @@ public abstract class Patch extends FieldObject implements IColliding
 	public float decDurabilityBy(float value)
 	{
 		durability-=value;
+		if(durability<=0)
+			setDead();
 		return durability;
 	}
 }
