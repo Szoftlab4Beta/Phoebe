@@ -1,5 +1,6 @@
 package szoftlab4Proto;
 
+import szoftlab4Proto.Patch.PatchType;
 import szoftlab4Proto.VectorClass.Direction;
 
 public class Robot extends MoveableFieldObject implements IColliding, IUpdateable{
@@ -11,77 +12,115 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 	
 	public Robot(Tile spawnTile, int startGoo, int startOil){
 		super(spawnTile);
+		gooAmount = startGoo;
+		oilAmount = startOil;
 	}
 	
 	public void modifySpeed(Direction d){
-		
+		speed.add(d);
 	}
 	
-	public Patch placePatch(){ //TODO biztosan így van ???
-		return null;
+	public Patch placePatch(PatchType type){ //TODO biztosan így van ??? no parameter az osztálydiagramon
+		Patch patch = null;	
+		switch (type) {
+		case Goo:
+			if(gooAmount > 0){
+				patch = new Goo(position);
+				gooAmount--;
+				((NormalTile)position).setPatch(patch);
+			}
+			break;
+		case Oil:
+			if(oilAmount > 0){
+				patch = new Oil(position);
+				oilAmount--;
+				((NormalTile)position).setPatch(patch);
+			}
+			break;
+		default:
+			return null;
+		}
+		return patch;
 	}
 	
 	public int getDistance(){
-		return 0;
+		return distance.length();
 	}
 	
 	public VectorClass getSpeedVector(){
-		return null;
+		return speed;
 	}
 	
 	public boolean isAtFinish(){
-		return false;
+		return atFinish;
 	}
 
 	@Override
 	public void accept(IColliding colliding) {
-		// TODO Auto-generated method stub
+		colliding.collide(this);
 	}
 
 	@Override
 	public void collide(Oil p) {
-		// TODO Auto-generated method stub
+		canChangeSpeed = false;
 	}
 
 	@Override
 	public void collide(Goo p) {
-		// TODO Auto-generated method stub
+		speed.halve();
+		p.decDurabilityBy(1f); //TODO: VAGY itt, vagy a Goo accept-jében???
 	}
 
 	@Override
 	public void collide(NormalTile t) {
-		// TODO Auto-generated method stub	
+		t.addObject(this);
+		Patch p = t.getPatch();
+		if(p != null)
+			p.accept(this);
+		for(IAcceptor object : t.getObjects()){
+			object.accept(this);
+		}
 	}
 
 	@Override
 	public void collide(Finish t) {
-		// TODO Auto-generated method stub
+		atFinish = true;
 	}
 
 	@Override
 	public void collide(EndOfField t) {
-		// TODO Auto-generated method stub
+		dead = true;
 	}
 
 	@Override
 	public void collide(Robot r) {
-		// TODO Auto-generated method stub
+		if(VectorClass.less(speed, r.speed)){
+			dead = true;
+		} else {
+			speed = VectorClass.average(speed, r.speed);
+		}
 	}
 
 	@Override
 	public void collide(JanitorRobot r) {
-		// TODO Auto-generated method stub
+		r.dead = true;
+		placePatch(PatchType.Oil);
 	}
 
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
+		for (Direction d : speed.vector.keySet()){
+			for(int i = 0; d != Direction.None && i < speed.vector.get(d); i++)
+				position = position.getTile(d);
+		}
 	}
 
 	@Override
 	public UpdateReturnCode update() {
-		// TODO Auto-generated method stub
-		return null;
+		position.accept(this);		//TODO: vagy itt vagy a move-ban
+		if(dead)
+			return UpdateReturnCode.RobotDied;
+		return UpdateReturnCode.Alive;
 	}
 	
 	
