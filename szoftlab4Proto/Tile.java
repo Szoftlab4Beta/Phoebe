@@ -7,13 +7,25 @@ import szoftlab4Proto.VectorClass.Direction;
 public abstract class Tile implements IAcceptor{
 	
 	public Map<Direction, Tile> sides; //TODO: Biztos public?
+	List<IAcceptor> objects;
+	
+	public Tile(){
+		sides = new HashMap<Direction, Tile>();
+	}
 	
 	public void setSide(Direction d, Tile tile){
-		
+		sides.put(d, tile);
 	}
 	
 	public Tile getTile(Direction d){
-		return null;
+		return sides.get(d);
+	}
+	public void addObject(IAcceptor o){
+		objects.add(o);
+	}
+	
+	public void removeObject(IAcceptor o){
+		objects.remove(o);
 	}
 
 	@Override
