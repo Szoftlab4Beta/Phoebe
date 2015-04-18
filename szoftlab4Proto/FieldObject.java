@@ -28,4 +28,7 @@ public abstract class FieldObject implements IAcceptor{
 		return dead;
 	}
 	
+	public void dispose(){
+		position.removeObject(this);
+	}
 }
