@@ -1,3 +1,4 @@
+package szoftlab4Proto;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,7 +13,6 @@ public class MapFactory {
     List<Tile> spawnTiles;
 
     public MapFactory(){ // Érték nélküli konstruktor
-        spawnTiles = new ArrayList<Tile>();
     }
 
 
@@ -68,12 +68,16 @@ public class MapFactory {
                         tileSet[i][j] = new EndOfField();
                         break;
                     case 'O':
-                        tileSet[i][j] = new NormalTile();
-                        tileSet[i][j].setPatch(new Oil());
+                        NormalTile no = new NormalTile();
+                        tileSet[i][j] = no;
+                        Oil o = new Oil(no);
+                        no.setPatch(o);
                         break;
                     case 'G':
-                        tileSet[i][j] = new NormalTile();
-                        tileSet[i][j].setPatch(new Goo());
+                        NormalTile ng = new NormalTile();
+                        tileSet[i][j] = ng;
+                        Goo g = new Goo(ng);
+                        ng.setPatch(g);
                         break;
                 }
             }
@@ -81,14 +85,22 @@ public class MapFactory {
 
         for (int i = 0; i < vertical; i++) {
             for (int j = 0; j < horizontal; j++) {
-                if (i > 0)
+                if (i > 0) {
                     tileSet[i][j].setSide(Direction.North, tileSet[i - 1][j]);
-                if (j < horizontal - 1)
+                    tileSet[i - 1][j].setSide(Direction.South, tileSet[i][j]);
+                }
+                if (j < horizontal - 1) {
                     tileSet[i][j].setSide(Direction.East, tileSet[i][j + 1]);
-                if (i < vertical - 1)
+                    tileSet[i][j + 1].setSide(Direction.West, tileSet[i][j]);
+                }
+                if (i < vertical - 1) {
                     tileSet[i][j].setSide(Direction.South, tileSet[i + 1][j]);
-                if (j > 0)
+                    tileSet[i + 1][j].setSide(Direction.North, tileSet[i][j]);
+                }
+                if (j > 0) {
                     tileSet[i][j].setSide(Direction.West, tileSet[i][j - 1]);
+                    tileSet[i][j - 1].setSide(Direction.East, tileSet[i][j]);
+                }
             }
         }
     }
