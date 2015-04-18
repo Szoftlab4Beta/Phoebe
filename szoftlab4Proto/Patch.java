@@ -29,4 +29,10 @@ public abstract class Patch extends FieldObject implements IColliding
 			setDead();
 		return durability;
 	}
+	
+	public void dispose()
+	{
+		if(((NormalTile)position).getPatch()==this)
+			((NormalTile)position).setPatch(null);
+	}
 }
