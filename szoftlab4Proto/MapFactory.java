@@ -9,7 +9,6 @@ import szoftlab4Proto.VectorClass.Direction;
 
 public class MapFactory {
 
-    private int remaingingSpawns; // Hány nem használt induló mezőnk van még
     String fileName;
     List<Tile> spawnTiles;
 
@@ -25,7 +24,6 @@ public class MapFactory {
     public void buildMap() throws IOException {
         int horizontal;
         int vertical;
-        String[] s;
         char[][] map;
         Tile[][] tileSet;
 
@@ -37,7 +35,6 @@ public class MapFactory {
         vertical = Integer.parseInt(line.substring(line.indexOf("<", line.indexOf(">")) + 1, line.indexOf(">", (line.indexOf("<", line.indexOf(">")))))); // A pálya magasságának kiolvasása
 
         line = textReader.readLine();
-        remaingingSpawns = Integer.parseInt(line.substring(line.indexOf("<") + 1, line.indexOf(">"))); // A pályán található indulópontok számának kiolvasása
 
         map = new char[vertical][horizontal];
 
@@ -50,6 +47,7 @@ public class MapFactory {
             line = textReader.readLine();
         }
 
+        textReader.close();
         tileSet = new Tile[vertical][horizontal];
 
         for (int i = 0; i < vertical; i++) {
