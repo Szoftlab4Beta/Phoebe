@@ -120,6 +120,7 @@ public class Game {
 			    }
 		    }
 		    index++;
+		    currentRobot = 0;
 		}
 		
 		spawnJanitor();				//TODO erre lehet nincs szükség, szintén a miatt, mert a testFile-oknak kéne az egészet irányítani mindenképp a mainLoopba kéne mozgatni

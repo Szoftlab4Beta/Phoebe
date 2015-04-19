@@ -1,11 +1,17 @@
 package szoftlab4Proto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NormalTile extends Tile{
 
 	Patch patch;
 	List<IAcceptor> objects;
+	
+	public NormalTile() {
+		super();
+		objects = new ArrayList<IAcceptor>();
+	}
 	
 	public void setPatch(Patch p){
 		patch = p;
@@ -15,6 +21,7 @@ public class NormalTile extends Tile{
 		return patch;
 	}
 	
+	@Override
 	public void addObject(IAcceptor o){
 		objects.add(o);
 	}

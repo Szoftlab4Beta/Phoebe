@@ -28,6 +28,7 @@ public abstract class Tile implements IAcceptor{
 		return sides.get(d);
 	}
 	public void addObject(IAcceptor o){
+	
 	}
 	
 	public void removeObject(IAcceptor o){

@@ -16,6 +16,7 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 		oilAmount = startOil;
 		distance = new VectorClass();
 		speed = new VectorClass();
+		spawnTile.addObject(this);
 	}
 	
 	public void modifySpeed(Direction d){
