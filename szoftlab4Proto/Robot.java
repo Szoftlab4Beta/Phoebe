@@ -68,7 +68,7 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 	@Override
 	public void collide(Goo p) {
 		speed.halve();
-		p.decDurabilityBy(1f); //TODO: VAGY itt, vagy a Goo accept-jében???
+		p.decDurabilityBy(1);
 	}
 
 	@Override
@@ -109,6 +109,7 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 
 	@Override
 	public void move() {
+		position.removeObject(this);
 		for (Direction d : speed.vector.keySet()){
 			for(int i = 0; d != Direction.None && i < speed.vector.get(d); i++)
 				position = position.getTile(d);

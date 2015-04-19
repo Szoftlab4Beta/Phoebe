@@ -9,13 +9,19 @@ public class Goo extends Patch{
 		maxDurability = 4;
 	}
 	
+	@Override
+	public float decDurabilityBy(float value){
+		super.decDurabilityBy(value);
+		if(durability < 0)
+			this.dispose();
+		return durability;
+	}
+	
 	public float getMaxDurability(){
 		return maxDurability;
 	}
 
 	public void collide(Robot r) {
-		r.speed.halve();
-		this.decDurabilityBy(1f);
 	}
 
 	@Override
