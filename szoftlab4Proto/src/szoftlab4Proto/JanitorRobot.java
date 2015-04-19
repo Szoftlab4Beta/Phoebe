@@ -23,9 +23,15 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	
 	void searchNearestPatch()
 	{
-		/*
-		 * TODO
-		 */
+		StartNode s=new StartNode(position);
+		
+		Stack<Direction> path=null;
+		while(s.canBeExtended() && path==null)
+		{
+			path=s.extendToNextLevel();
+		}
+		if(path!=null)
+			pathQueue=path;
 	}
 	
 	public JanitorWorkState getWorkState()
@@ -104,7 +110,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		for(IAcceptor o : t.getObjects())
 		{
 			o.accept(this);
-			if(position!=t) //Ha visszapattantunk az ütközés következtében
+			if(position!=t)
 				break;
 		}
 	}
@@ -124,7 +130,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	@Override
 	public void collide(Robot r)
 	{
-		if(workState==JanitorWorkState.Working || (bounced/* && (position==r.getPosition())*/))
+		if(workState==JanitorWorkState.Working || bounced)
 		{
 			setDead();
 			((NormalTile)position).setPatch(new Oil(position));
@@ -149,7 +155,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	{
 		if(workState==JanitorWorkState.Searching)
 		{
-			if(bounced/* && (position==r.getPosition())*/)
+			if(bounced)
 			{
 				setDead();
 				return;
