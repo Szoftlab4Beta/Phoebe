@@ -6,61 +6,40 @@ public class Goo extends Patch{
 
 	public Goo(Tile position) {
 		super(position);
-		// TODO Auto-generated constructor stub
+		maxDurability = 4;
 	}
 
-	public float getMaxDurability(){
-		return 0;
+	public void collide(Robot r) {
+		r.speed.halve();
+		this.decDurabilityBy(1f);
 	}
 
 	@Override
 	public void collide(Oil p) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void collide(Goo p) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void collide(NormalTile t) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void collide(Finish t) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void collide(EndOfField t) {
-		// TODO Auto-generated method stub
-		
+	public void collide(EndOfField t) {		
 	}
 
 	@Override
-	public void collide(Robot r) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void collide(JanitorRobot r) {
-		// TODO Auto-generated method stub
-		
+	public void collide(JanitorRobot r) {		
 	}
 
 	@Override
 	public void accept(IColliding colliding) {
-		// TODO Auto-generated method stub
-		
 	}
-	
-	
 	
 }
