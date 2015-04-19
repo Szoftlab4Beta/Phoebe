@@ -44,6 +44,7 @@ public class Game {
 //			nextTurn();
 //		    winner = testWinConditions();
 //		    ereaseDeadObjects();
+//			spawnJanitor(mapFactory.getNextSpawn());
 //		}
 //	}
 		
@@ -99,8 +100,10 @@ public class Game {
 		for (MoveableFieldObject element : moveables) {
 		    element.move();
 		}
-		int index = 0;
-		for (IUpdateable element : updateables) {
+		int maxIndex = updateables.size();
+		IUpdateable element;
+		for (int index = 0; index < maxIndex; index++) {
+			element = updateables.get(index);
 			IUpdateable.UpdateReturnCode status = element.update();
 		    if (status != IUpdateable.UpdateReturnCode.Alive){
 		    	if (status == IUpdateable.UpdateReturnCode.Died){
@@ -118,12 +121,10 @@ public class Game {
 		    		robots.remove(element);
 		    		playerNum--;
 			    }
+		    	index--;
 		    }
-		    index++;
-		    currentRobot = 0;
 		}
-		
-		spawnJanitor();				//TODO erre lehet nincs szükség, szintén a miatt, mert a testFile-oknak kéne az egészet irányítani mindenképp a mainLoopba kéne mozgatni
+	    currentRobot = 0;
 		currentTurn++;
 	}
 	
@@ -153,11 +154,11 @@ public class Game {
 		return winner;
 	}
 	
-	void spawnJanitor(){
-		if ((currentTurn % janitorSpawnInterval) == 0){
-			new JanitorRobot(mapFactory.getNextSpawn());
-			janitorCount++;
-		}
+	public void spawnJanitor(Tile spawnTile){
+		JanitorRobot r = new JanitorRobot(spawnTile);
+		updateables.add(r);
+		moveables.add(r);
+		janitorCount++;
 	}
 	
 	void ereaseDeadObjects(){

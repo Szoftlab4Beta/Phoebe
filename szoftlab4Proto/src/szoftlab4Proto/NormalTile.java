@@ -34,4 +34,9 @@ public class NormalTile extends Tile{
 		return objects;
 	}
 	
+	@Override
+	public void accept(IColliding colliding) {
+		colliding.collide(this);
+	}
+	
 }
