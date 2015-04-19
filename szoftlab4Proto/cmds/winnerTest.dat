@@ -3,13 +3,13 @@ setTurn(E,0)
 setTurn(E,0)
 nextTurn
 getWinner
-newGame(2,30,next_turn_2_test_map)
+newGame(2,2,next_turn_2_test_map)
 setTurn(0,0)
 setTurn(E,0)
 nextTurn
 nextTurn
 getWinner
-newGame(3,30,next_turn_3_test_map)
+newGame(2,3,next_turn_3_test_map)
 setTurn(E,0)
 setTurn(0,0)
 nextTurn
