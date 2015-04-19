@@ -6,6 +6,8 @@ public class Oil extends Patch implements IUpdateable{
 	
 	public Oil(Tile position) {
 		super(position);
+		maxDurability = 4;
+		durability = maxDurability;
 	}
 
 	public float getMaxDurability(){
@@ -48,7 +50,7 @@ public class Oil extends Patch implements IUpdateable{
 	@Override
 	public UpdateReturnCode update() {
 		decDurabilityBy(maxDurability/cleanTime);
-		if(durability < 0)
+		if(durability <= 0)
 			return UpdateReturnCode.Died;
 		return UpdateReturnCode.Alive;
 	}

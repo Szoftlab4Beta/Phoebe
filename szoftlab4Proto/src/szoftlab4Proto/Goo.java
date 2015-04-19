@@ -7,6 +7,7 @@ public class Goo extends Patch{
 	public Goo(Tile position) {
 		super(position);
 		maxDurability = 4;
+		durability = maxDurability;
 	}
 	
 	@Override
@@ -50,6 +51,7 @@ public class Goo extends Patch{
 
 	@Override
 	public void accept(IColliding colliding) {
+		colliding.collide(this);
 	}
 	
 }

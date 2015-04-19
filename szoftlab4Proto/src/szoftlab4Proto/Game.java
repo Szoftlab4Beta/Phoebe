@@ -91,7 +91,9 @@ public class Game {
 			robot.placePatch(p);
 		}
 		else if (p == Patch.PatchType.Oil) {
-			updateables.add((Oil)robot.placePatch(p));
+			Oil o = (Oil)robot.placePatch(p);
+			if(o != null)
+				updateables.add(o);
 		}
 		currentRobot++;
 	}
@@ -122,6 +124,7 @@ public class Game {
 		    		playerNum--;
 			    }
 		    	index--;
+		    	maxIndex = updateables.size();
 		    }
 		}
 	    currentRobot = 0;

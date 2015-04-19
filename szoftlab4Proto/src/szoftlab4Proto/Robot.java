@@ -23,7 +23,7 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 		speed.add(d);
 	}
 	
-	public Patch placePatch(PatchType type){ //TODO biztosan így van ??? no parameter az osztálydiagramon
+	public Patch placePatch(PatchType type){
 		Patch patch = null;	
 		switch (type) {
 		case Goo:
@@ -76,13 +76,13 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 
 	@Override
 	public void collide(NormalTile t) {
-		t.addObject(this);
 		Patch p = t.getPatch();
 		if(p != null)
 			p.accept(this);
 		for(IAcceptor object : t.getObjects()){
 			object.accept(this);
 		}
+		t.addObject(this);
 	}
 
 	@Override
