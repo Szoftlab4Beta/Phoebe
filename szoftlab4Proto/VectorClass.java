@@ -22,6 +22,20 @@ public class VectorClass {
 				return None;
 			}
 		}
+		public Direction getRelativeEast() {
+			switch(this) {
+			case North:
+				return East;
+			case East:
+				return South;
+			case South:
+				return West;
+			case West:
+				return North;
+			default:
+				return None;
+			}
+		}
 	};
 
 	public Map<Direction, Integer> vector;
