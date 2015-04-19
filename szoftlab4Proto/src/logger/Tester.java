@@ -48,7 +48,7 @@ public class Tester implements IColliding {
 			currentLine = expReader.readLine();
 			cmdOut = cmdOutReader.readLine();
 			if(currentLine == null || !currentLine.equals(cmdOut)){
-				System.out.println("Mismatch in line " + lineCount + " command output = " + cmdOut + " expected = " + currentLine);
+				System.out.println("Mismatch in line " + i + "-> command output = " + cmdOut + " expected = " + currentLine);
 				return;
 			}
 		}
@@ -65,13 +65,13 @@ public class Tester implements IColliding {
 		} else if(cmdValues[0].equals("nextTurn")){
 			game.nextTurn();
 		} else if(cmdValues[0].equals("getWinner")){
-			return "" + game.testWinConditions();
+			return game.testWinConditions() + "\n";
 		} else if(cmdValues[0].equals("getMapTile")){
-			return getTileName(tiles[Integer.parseInt(cmdValues[1])][Integer.parseInt(cmdValues[2])]);
+			return getTileName(tiles[Integer.parseInt(cmdValues[2])][Integer.parseInt(cmdValues[1])]);
 		} else if(cmdValues[0].equals("listRobot")){
 			return listRobot();
 		} else if(cmdValues[0].equals("spawnJanitor")){
-			return "spawnJanitor";
+			game.spawnJanitor(tiles[Integer.parseInt(cmdValues[1])][Integer.parseInt(cmdValues[2])]);
 		} else if(cmdValues[0].equals("listJanitor")){
 			return "listJanitor";
 		}
@@ -119,7 +119,7 @@ public class Tester implements IColliding {
 	
 	String getTileName(Tile tile){
 		tile.accept(this);
-		return testedTile;
+		return testedTile + "\n";
 	}
 	
 	String getTilePos(Tile tile){
