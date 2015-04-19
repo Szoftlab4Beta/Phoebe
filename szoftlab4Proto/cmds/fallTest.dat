@@ -1,0 +1,6 @@
+newGame(1,30,fall_down_test_map)
+listRobot()
+setTurn(E,0)
+nextTurn()
+nextTurn()
+listRobot()

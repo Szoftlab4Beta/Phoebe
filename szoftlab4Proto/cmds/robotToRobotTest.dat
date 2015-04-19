@@ -1,0 +1,7 @@
+newGame(2,30,robot_robot_interaction_test_map)
+listRobot
+setTurn(0,0)
+setTurn(W,0)
+nextTurn
+nextTurn
+listRobot

@@ -1,0 +1,7 @@
+newGame(1,30,goo_test_map)
+listRobot
+setTurn(E,0)
+nextTurn
+setTurn(E,0)
+nextTurn
+listRobot

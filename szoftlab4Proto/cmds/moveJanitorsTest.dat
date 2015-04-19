@@ -1,0 +1,7 @@
+newGame(1,30,janitor_jump_test_map)
+spawnJanitor(3,1)
+listJanitor
+nextTurn
+listJanitor
+nextTurn
+listJanitor

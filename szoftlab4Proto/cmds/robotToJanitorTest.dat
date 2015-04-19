@@ -1,0 +1,9 @@
+newGame(1,30,robot_janitor_interaction_test_map)
+spawnJanitor(1,1)
+listJanitor
+listRobot
+setTurn(S,0)
+nextTurn
+listJanitor
+listRobot
+getMapTile(1,1)

@@ -1,0 +1,10 @@
+newGame(1,30,janitor_clean_test_map)
+spawnJanitor(0,0)
+listJanitor
+nextTurn
+listJanitor
+nextTurn
+nextTurn
+nextTurn
+nextTurn
+listJanitor

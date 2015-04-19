@@ -1,0 +1,8 @@
+newGame(1,30,oil_test_map)
+listRobot
+setTurn(E,0)
+nextTurn
+listRobot
+setTurn(N,0)
+nextTurn
+listRobot
