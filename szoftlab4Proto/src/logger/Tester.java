@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 
 import szoftlab4Proto.*;
 import szoftlab4Proto.Patch.PatchType;
@@ -24,6 +25,7 @@ public class Tester implements IColliding {
 	}
 		
 	public void run() throws IOException{
+		StringBuilder builder = new StringBuilder();
 		String cmdOut;
 		int lineCount = 0;
 		if(game == null){
@@ -34,41 +36,59 @@ public class Tester implements IColliding {
 		currentLine = cmdReader.readLine();
 		while(currentLine != null){
 				cmdOut = doNextCommand();
-				currentLine = expReader.readLine();
-				if(cmdOut != null && !cmdOut.equals(currentLine)){
-					System.out.println("Mismatch in line " + lineCount + " command output = " + cmdOut + " expected = " + currentLine);
+				if(cmdOut != null){
+					builder.append(cmdOut);
+					lineCount++;
 				}
 				currentLine = cmdReader.readLine();
-				lineCount++;
+				
+		}
+		BufferedReader cmdOutReader = new BufferedReader(new StringReader(builder.toString()));
+		for(int i = 0; i < lineCount; i++){
+			currentLine = expReader.readLine();
+			cmdOut = cmdOutReader.readLine();
+			if(currentLine == null || !currentLine.equals(cmdOut)){
+				System.out.println("Mismatch in line " + lineCount + " command output = " + cmdOut + " expected = " + currentLine);
+				return;
+			}
 		}
 		System.out.println("CONGRATS the expected output perfectly matches the output");
 	}
 	
-	String doNextCommand() {
+	String doNextCommand() throws NumberFormatException, IOException {
 		String[] cmdValues;
 		cmdValues = currentLine.split("[(,)]");
 		if(cmdValues[0].equals("newGame")){
-			game.newGame(Integer.parseInt(cmdValues[1]), Integer.parseInt(cmdValues[2]), cmdValues[3]);//TODO: Nincs playerCount paraméter
-		} else if(cmdValues.equals("setTurn")){
+			newGame(Integer.parseInt(cmdValues[1]), Integer.parseInt(cmdValues[2]), cmdValues[3]);
+		} else if(cmdValues[0].equals("setTurn")){
 			setTurn(cmdValues[1], cmdValues[2]);
-		} else if(cmdValues.equals("nextTurn")){
+		} else if(cmdValues[0].equals("nextTurn")){
 			game.nextTurn();
-		} else if(cmdValues.equals("getWinner")){
+		} else if(cmdValues[0].equals("getWinner")){
 			return "" + game.testWinConditions();
-		} else if(cmdValues.equals("getMapTile")){
+		} else if(cmdValues[0].equals("getMapTile")){
 			return getTileName(tiles[Integer.parseInt(cmdValues[1])][Integer.parseInt(cmdValues[2])]);
-		} else if(cmdValues.equals("listRobot")){
+		} else if(cmdValues[0].equals("listRobot")){
 			return listRobot();
-		} else if(cmdValues.equals("spawnJanitor")){
-			//TODO: ????
-		} else if(cmdValues.equals("listJanitor")){
-			//listJanitor(); TODO ?
+		} else if(cmdValues[0].equals("spawnJanitor")){
+			return "spawnJanitor";
+		} else if(cmdValues[0].equals("listJanitor")){
+			return "listJanitor";
 		}
 		return null;
 	}
 	
+	void newGame(int playerNum, int turns, String mapFile) throws IOException{
+		tiles = game.newGame(playerNum, turns, mapFile);
+		BufferedReader textReader = new BufferedReader(new FileReader(App.asFilePath("MapFiles", mapFile)));
+        String line = textReader.readLine();
+        height = Integer.parseInt(line.substring(line.indexOf("<") + 1, line.indexOf(">")));
+        width = Integer.parseInt(line.substring(line.indexOf("<", line.indexOf(">")) + 1, line.indexOf(">", (line.indexOf("<", line.indexOf(">"))))));
+        textReader.close();
+	}
+	
 	void setTurn(String dir, String patch){
-		Direction d = Direction.valueOf(dir);
+		Direction d = Direction.valueOf(parseDirectionCmd(dir));
 		PatchType p = PatchType.None;
 		if(patch.equals("O"))
 			p = PatchType.Oil;
@@ -147,6 +167,18 @@ public class Tester implements IColliding {
 	public void collide(JanitorRobot r) {		
 	}
 	
-	
+	public String parseDirectionCmd(String cmd){
+		if(cmd.equals("E"))
+			return "East";
+		if(cmd.equals("W"))
+			return "West";
+		if(cmd.equals("N"))
+			return "North";
+		if(cmd.equals("S"))
+			return "South";
+		if(cmd.equals("0"))
+			return "None";
+		return null;
+	}
 	
 }

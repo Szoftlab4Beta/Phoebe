@@ -1,43 +1,43 @@
 package szoftlab4Proto;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import szoftlab4Proto.VectorClass.Direction;
 
 public class MapFactory {
 
-    String fileName;
+    File mapFile;
     List<Tile> spawnTiles;
+    int currentSpawnTile = -1;
 
     public MapFactory(){ // Érték nélküli konstruktor
+    	spawnTiles = new ArrayList<Tile>();
     }
 
-
-    public MapFactory(String s){ // Értékátadós konstruktor
-        fileName = s;
+    public MapFactory(String fileName){ // Értékátadós konstruktor
+        mapFile = new File(App.asFilePath("MapFiles", fileName));
         spawnTiles = new ArrayList<Tile>();
     }
 
-    public void buildMap() throws IOException {
+    public Tile[][] buildMap() throws IOException {
         int horizontal;
         int vertical;
         char[][] map;
         Tile[][] tileSet;
 
-        BufferedReader textReader = new BufferedReader(new FileReader(fileName));
+        BufferedReader textReader = new BufferedReader(new FileReader(mapFile));
         String line = textReader.readLine();
 
         horizontal = Integer.parseInt(line.substring(line.indexOf("<") + 1, line.indexOf(">"))); // A pálya szélességének kiolvasása
 
         vertical = Integer.parseInt(line.substring(line.indexOf("<", line.indexOf(">")) + 1, line.indexOf(">", (line.indexOf("<", line.indexOf(">")))))); // A pálya magasságának kiolvasása
 
-        line = textReader.readLine();
-
         map = new char[vertical][horizontal];
-
 
         line = textReader.readLine();
 
@@ -88,11 +88,11 @@ public class MapFactory {
                     tileSet[i][j].setSide(Direction.North, tileSet[i - 1][j]);
                     tileSet[i - 1][j].setSide(Direction.South, tileSet[i][j]);
                 }
-                if (j < horizontal - 1) {
+                if (j < horizontal - 2) {
                     tileSet[i][j].setSide(Direction.East, tileSet[i][j + 1]);
                     tileSet[i][j + 1].setSide(Direction.West, tileSet[i][j]);
                 }
-                if (i < vertical - 1) {
+                if (i < vertical - 2) {
                     tileSet[i][j].setSide(Direction.South, tileSet[i + 1][j]);
                     tileSet[i + 1][j].setSide(Direction.North, tileSet[i][j]);
                 }
@@ -102,14 +102,16 @@ public class MapFactory {
                 }
             }
         }
+        return tileSet;
     }
 
-    public void setFile(String s){
-        fileName = s;
+    public void setFile(String fileName){
+        mapFile = new File(App.asFilePath("MapFiles", fileName));
     }
 
     public Tile getNextSpawn(){
-        return spawnTiles.remove(spawnTiles.size()-1);
+        currentSpawnTile = (currentSpawnTile + 1) % spawnTiles.size();
+        return spawnTiles.get(currentSpawnTile);
     }
 
 }

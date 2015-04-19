@@ -84,20 +84,20 @@ public class App {
 				throw new InvalidKeyException("WTF happened?!?");
 			}
 			if(!exit){
-				tester.setInOut(asFilePath(cmdFile), asFilePath(expectedOut));
+				tester.setInOut(asFilePath("cmds", cmdFile), asFilePath("cmds", expectedOut));
 				tester.game = game;
 				tester.run();
 			}
 		}
 		} catch(Exception e){
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			
 		}
 	}
 	
-	static String asFilePath(String fileName){
-		return "szoftlab4Proto/cmds/" + fileName + ".dat";
+	public static String asFilePath(String directory, String fileName){
+		return "./"+ directory + "/" + fileName + ".dat";
 	}
 
 }

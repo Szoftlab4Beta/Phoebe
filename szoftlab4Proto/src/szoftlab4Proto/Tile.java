@@ -1,9 +1,7 @@
 package szoftlab4Proto;
 
 import java.util.Map;
-import java.util.List;
 import java.util.HashMap;
-import java.util.ArrayList;
 import szoftlab4Proto.VectorClass.Direction;
 
 public abstract class Tile implements IAcceptor{

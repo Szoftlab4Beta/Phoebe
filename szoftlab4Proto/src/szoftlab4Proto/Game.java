@@ -1,9 +1,7 @@
 package szoftlab4Proto;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import szoftlab4Proto.Patch.PatchType;
 import szoftlab4Proto.VectorClass.Direction;
@@ -28,28 +26,29 @@ public class Game {
 		
 	}
 	
-	void mainLoop() {						//TODO asszem ezt jelenleg a testFileok irányítják (nincs rá igazán szükség csak osztályba foglaltam)
-		int winner = testWinConditions();
-		while (winner < 0){
-			currentRobot = 0;
-			
-			for (Robot element : robots) {
-				int direction = -1;
-				int type = -1;
-								
-			    setTurn(
-			    		VectorClass.Direction.values()[direction],
-			    		Patch.PatchType.values()[type]
-			    				);
-			    currentRobot++;
-			}
-			nextTurn();
-		    winner = testWinConditions();
-		    ereaseDeadObjects();
-		}
-	}
+//	void mainLoop() {						//TODO asszem ezt jelenleg a testFileok irányítják (nincs rá igazán szükség csak osztályba foglaltam)
+//		int winner = testWinConditions();
+//		while (winner < 0){
+//			currentRobot = 0;
+//			
+//			for (Robot element : robots) {
+//				int direction = -1;
+//				int type = -1;
+//								
+//			    setTurn(
+//			    		VectorClass.Direction.values()[direction],
+//			    		Patch.PatchType.values()[type]
+//			    				);
+//			    currentRobot++;
+//			}
+//			nextTurn();
+//		    winner = testWinConditions();
+//		    ereaseDeadObjects();
+//		}
+//	}
 		
-	public void newGame(int playerNum, int turns, String mapFile){
+	public Tile[][] newGame(int playerNum, int turns, String mapFile){
+		Tile[][] ret = null;
 		int startGoo = 3;
 		int startOil = 3;
 		currentTurn = 0;
@@ -63,7 +62,7 @@ public class Game {
 		
 		try {
 			mapFactory.setFile(mapFile);
-			mapFactory.buildMap();
+			ret = mapFactory.buildMap();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -78,7 +77,8 @@ public class Game {
 			updateables.add(r);
 			moveables.add(r);
 		}
-		mainLoop(); //TODO same
+		//mainLoop(); //TODO same
+		return ret;
 	}
 	
 	public void setTurn(Direction d, PatchType p){
@@ -95,7 +95,7 @@ public class Game {
 		currentRobot++;
 	}
 	
-	void nextTurn(){
+	public void nextTurn(){
 		for (MoveableFieldObject element : moveables) {
 		    element.move();
 		}
@@ -126,7 +126,7 @@ public class Game {
 		currentTurn++;
 	}
 	
-	int testWinConditions(){
+	public int testWinConditions(){
 		int winner = -1;
 		int index = 0;
 		int max = 0;
@@ -161,6 +161,14 @@ public class Game {
 	
 	void ereaseDeadObjects(){
 		deadObjects.clear();
+	}
+	
+	public int getPlayerNum(){
+		return playerNum;
+	}
+	
+	public Robot getRobot(int idx){
+		return robots.get(idx);
 	}
 
 }

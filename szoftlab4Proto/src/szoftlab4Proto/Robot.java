@@ -14,6 +14,8 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 		super(spawnTile);
 		gooAmount = startGoo;
 		oilAmount = startOil;
+		distance = new VectorClass();
+		speed = new VectorClass();
 	}
 	
 	public void modifySpeed(Direction d){
@@ -124,6 +126,8 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 		return UpdateReturnCode.Alive;
 	}
 	
-	
+	public String getLogString(){
+		return "<" + oilAmount + "><" + gooAmount + "><" + distance.length() + "><" + speed.length() + ">";
+	}
 	
 }
