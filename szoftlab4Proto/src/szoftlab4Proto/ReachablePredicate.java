@@ -1,7 +1,5 @@
 package szoftlab4Proto;
 
-import java.util.function.Predicate;
-
 class ReachablePredicate implements Predicate<Tile>, IColliding
 {
 	private boolean reachable;
