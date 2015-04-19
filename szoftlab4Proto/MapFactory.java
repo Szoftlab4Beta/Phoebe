@@ -109,7 +109,7 @@ public class MapFactory {
     }
 
     public Tile getNextSpawn(){
-        return spawnTiles.remove(spawnTiles.size());
+        return spawnTiles.remove(spawnTiles.size()-1);
     }
 
 }
