@@ -24,53 +24,11 @@ public class Game {
 	int janitorSpawnInterval;
 	int janitorCount;
 	
-	public static void main(String [] args)
-	{
-		Game game = new Game();
+	public Game(){
+		
 	}
 	
-	public Game() {
-		int playerNum = 0;
-		int turns = 0;
-		int map = -1;
-		
-		Scanner sc = new Scanner(System.in);
-		
-		File folder = new File("mapFiles/");
-		File[] listOfFiles = folder.listFiles();
-
-		int map_count = 0;
-		for (File file : listOfFiles) {
-		    if (file.isFile()) {
-		    	String name = file.getName().substring(0, file.getName().lastIndexOf("."));
-		        System.out.println(map_count++ + " - " + name);
-		    }
-		}
-		
-		while(map < 0 || map > map_count){
-			System.out.println("Választott pálya száma?");
-		    while ((!sc.hasNextInt())) sc.next();
-		    map = sc.nextInt();
-		    if (map < 0 || map > map_count) System.out.println("Kérlek 0 és " + map_count + " közötti zámot adj meg");
-		}
-		
-		String mapFile = String.format("mapFiles/%s", listOfFiles[map].getName());
-		
-		while(playerNum < 1){
-			System.out.println("Játékosok száma? (Egész érték, 0 fölött)");
-		    while ((!sc.hasNextInt())) sc.next();
-		    playerNum = sc.nextInt();
-		    if (playerNum < 1) System.out.println("Kérlek pozitív számot adj meg.");
-		}
-		
-		while(turns < 1){
-			System.out.println("Körök száma? (Egész érték, 0 fölött)");
-		    while ((!sc.hasNextInt())) sc.next();
-		    turns = sc.nextInt();
-		    if (turns < 1) System.out.println("Kérlek pozitív számot adj meg.");
-		}
-		newGame(playerNum, turns, mapFile);	
-		
+	void mainLoop() {						//TODO asszem ezt jelenleg a testFileok irányítják (nincs rá igazán szükség csak osztályba foglaltam)
 		int winner = testWinConditions();
 		while (winner < 0){
 			currentRobot = 0;
@@ -78,37 +36,17 @@ public class Game {
 			for (Robot element : robots) {
 				int direction = -1;
 				int type = -1;
-				
-				while(direction < 0 || direction > 4){
-					System.out.println("Merre menjen? 1-Eszak, 2-Kelet, 3-Del, 4-Nyugat, 0-Semerre");
-					while ((!sc.hasNextInt())) sc.next();
-					direction = sc.nextInt();
-					if (direction < 0 || direction > 4) {
-						System.out.println("Kérlek 0-5 közötti számot adj meg.");
-					}
-				}
-				
-				while(type < 0 || type > 2){
-					System.out.println("Hagyjon foltot? 1-Ragacsfoltot, 2-Olajfoltot, 0-Semmit");
-					while ((!sc.hasNextInt())) sc.next();
-					type = sc.nextInt();
-					if (type < 0 || type > 2) {
-						System.out.println("Kérlek 0-2 közötti számot adj meg.");
-					}
-				}
-				
+								
 			    setTurn(
 			    		VectorClass.Direction.values()[direction],
 			    		Patch.PatchType.values()[type]
 			    				);
-			    
-			    nextTurn();
-			    winner = testWinConditions();
-			    ereaseDeadObjects();
 			    currentRobot++;
 			}
+			nextTurn();
+		    winner = testWinConditions();
+		    ereaseDeadObjects();
 		}
-		
 	}
 		
 	public void newGame(int playerNum, int turns, String mapFile){
@@ -133,9 +71,14 @@ public class Game {
 		this.turns = turns;
 		
 		robots = new ArrayList<Robot>();
+		Robot r;
 		for(int i = 0; i < this.playerNum; i++){
-			robots.add( new Robot(mapFactory.getNextSpawn(), startGoo, startOil) );
+			r = new Robot(mapFactory.getNextSpawn(), startGoo, startOil);
+			robots.add(r);
+			updateables.add(r);
+			moveables.add(r);
 		}
+		mainLoop(); //TODO same
 	}
 	
 	public void setTurn(Direction d, PatchType p){
@@ -143,18 +86,17 @@ public class Game {
 		if (d != VectorClass.Direction.None) {
 			robot.modifySpeed(d);
 		}
-		if (p == Patch.PatchType.None) {
-		}
-		else if (p != Patch.PatchType.Goo) {
-			//updateables.add(robot.placePatch(p));
-		} else {
+		if (p == Patch.PatchType.Goo) {
 			robot.placePatch(p);
+		}
+		else if (p == Patch.PatchType.Oil) {
+			updateables.add((Oil)robot.placePatch(p));
 		}
 		currentRobot++;
 	}
 	
 	void nextTurn(){
-		for (Robot element : robots) {
+		for (MoveableFieldObject element : moveables) {
 		    element.move();
 		}
 		int index = 0;
@@ -167,17 +109,20 @@ public class Game {
 			    }
 		    	else if (status == IUpdateable.UpdateReturnCode.JanitorDied){
 		    		moveables.remove(element);
+		    		updateables.remove(index);
 		    		janitorCount--;
 			    }
 		    	else if (status == IUpdateable.UpdateReturnCode.RobotDied){
 		    		moveables.remove(element);
+		    		updateables.remove(index);
+		    		robots.remove(element);
 		    		playerNum--;
 			    }
 		    }
 		    index++;
 		}
 		
-		spawnJanitor();		
+		spawnJanitor();				//TODO erre lehet nincs szükség, szintén a miatt, mert a testFile-oknak kéne az egészet irányítani mindenképp a mainLoopba kéne mozgatni
 		currentTurn++;
 	}
 	

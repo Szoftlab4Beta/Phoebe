@@ -8,6 +8,10 @@ public class Goo extends Patch{
 		super(position);
 		maxDurability = 4;
 	}
+	
+	public float getMaxDurability(){
+		return maxDurability;
+	}
 
 	public void collide(Robot r) {
 		r.speed.halve();

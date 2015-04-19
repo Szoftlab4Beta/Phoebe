@@ -20,7 +20,7 @@ public abstract class Tile implements IAcceptor{
 		sides.put(d, tile);
 	}
 	
-	public Tile getTile(Direction d){
+	public Tile getTile(Direction d){		//TODO: fuck its getSide well w/e
 		return sides.get(d);
 	}
 	public void addObject(IAcceptor o){
@@ -33,7 +33,6 @@ public abstract class Tile implements IAcceptor{
 
 	@Override
 	public void accept(IColliding colliding) {
-		// TODO Auto-generated method stub
-		
+
 	}
 }

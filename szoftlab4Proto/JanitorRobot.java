@@ -104,7 +104,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		for(IAcceptor o : t.getObjects())
 		{
 			o.accept(this);
-			if(position!=t) //Ha visszapattantunk az ütközés következtében
+			if(position!=t) //Ha visszapattantunk az Ã¼tkÃ¶zÃ©s kÃ¶vetkeztÃ©ben
 				break;
 		}
 	}
@@ -112,7 +112,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	@Override
 	public void collide(Finish t)
 	{
-		//Nem létezik ilyen eset
+		//Nem lÃ©tezik ilyen eset
 	}
 
 	@Override
