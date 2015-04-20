@@ -11,6 +11,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	JanitorWorkState workState;
 	Stack<Direction> pathQueue;
 	boolean bounced;
+	Tile destination;
 	
 	public JanitorRobot(Tile position)
 	{
@@ -18,6 +19,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		workState=JanitorWorkState.Searching;
 		pathQueue=new Stack<Direction>();
 		bounced=false;
+		destination=position;
 		searchNearestPatch();
 	}
 	
@@ -31,7 +33,13 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			path=s.extendToNextLevel();
 		}
 		if(path!=null)
+		{
 			pathQueue=path;
+			
+			destination=position;
+			for(int i=0;i<pathQueue.size();++i)
+				destination=destination.getTile(pathQueue.get(i));
+		}
 	}
 	
 	public JanitorWorkState getWorkState()
@@ -41,13 +49,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	
 	public Tile getDestination()
 	{
-		Tile ret=position;
-		for(int i=0;i<pathQueue.size();++i)
-		{
-			ret=ret.getTile(pathQueue.get(i));
-		}
-		
-		return ret;
+		return destination;
 	}
 
 	@Override
@@ -59,25 +61,29 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	@Override
 	public UpdateReturnCode update()
 	{
-		if(workState==JanitorWorkState.WorkStarted)
-			workState=JanitorWorkState.Working;
-		
 		if(position==null)
 		{
 			setDead();
 			return UpdateReturnCode.JanitorDied;
 		}
 		
-		if(!pathQueue.isEmpty())
+		if(((NormalTile)destination).getPatch()==null)
 		{
-			pathQueue.pop();
-			
-			if(pathQueue.isEmpty())
+			searchNearestPatch();
+			workState=JanitorWorkState.Searching;
+		}
+		else if(position==destination)
+		{
+			if(workState==JanitorWorkState.Searching)
 				workState=JanitorWorkState.WorkStarted;
+			else if(workState==JanitorWorkState.WorkStarted)
+				workState=JanitorWorkState.Working;
 		}
 		
-		if(pathQueue.isEmpty())
-			position.accept(this);
+		position.accept(this);
+		
+		if(!pathQueue.isEmpty())
+			pathQueue.pop();
 		
 		bounced=false;
 		
@@ -109,14 +115,18 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	@Override
 	public void collide(NormalTile t)
 	{
-		Patch p=t.getPatch();
-		if(p!=null)
+		if(workState!=JanitorWorkState.Searching)
 		{
-			p.accept(this);
-		}
-		else if(workState==JanitorWorkState.Working)
-		{
-			searchNearestPatch();
+			Patch p=t.getPatch();
+			if(p!=null)
+			{
+				p.accept(this);
+			}
+			else
+			{
+				searchNearestPatch();
+				workState=JanitorWorkState.Searching;
+			}
 		}
 		
 		for(IAcceptor o : t.getObjects())
