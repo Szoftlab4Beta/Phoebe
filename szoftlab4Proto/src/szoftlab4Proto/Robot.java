@@ -117,6 +117,7 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 			for(int i = 0; d != Direction.None && i < speed.vector.get(d); i++)
 				position = position.getTile(d);
 		}
+		distance.add(speed);
 	}
 
 	@Override

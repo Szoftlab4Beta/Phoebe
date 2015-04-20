@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import szoftlab4Proto.*;
 import szoftlab4Proto.Patch.PatchType;
@@ -16,6 +18,7 @@ public class Tester implements IColliding {
 	File cmd, expected;
 	public Game game;
 	BufferedReader cmdReader, expReader;
+	List<JanitorRobot> janitors = new ArrayList<JanitorRobot>();
 	Tile[][] tiles;
 	int height, width;
 	
@@ -71,7 +74,7 @@ public class Tester implements IColliding {
 		} else if(cmdValues[0].equals("listRobot")){
 			return listRobot();
 		} else if(cmdValues[0].equals("spawnJanitor")){
-			game.spawnJanitor(tiles[Integer.parseInt(cmdValues[2])][Integer.parseInt(cmdValues[1])]);
+			janitors.add(game.spawnJanitor(tiles[Integer.parseInt(cmdValues[2])][Integer.parseInt(cmdValues[1])]));
 		} else if(cmdValues[0].equals("listJanitor")){
 			return "listJanitor";
 		}
@@ -110,12 +113,21 @@ public class Tester implements IColliding {
 		return builder.toString();
 	}
 
-//	void listJanitor(){
-//		StringBuilder builder = new StringBuilder();
-//		for(int i = 0; i < game.getJanitorCount(); i++){
-//			
-//		}
-//	}
+	String listJanitor(){
+		StringBuilder builder = new StringBuilder();
+		int maxIndex = janitors.size();
+		for(int i = 0; i < maxIndex;){
+			JanitorRobot r = janitors.get(i);
+			if(r.isDead())
+				janitors.remove(i);
+			else 
+			{
+				NormalTile d = (NormalTile)r.getDestination();
+				builder.append("<" + i + ">" + getTilePos(r.getPosition()) + "<" + d.getPatch().getDurability() + ">" + getTilePos(d));
+			}
+		}
+		return builder.toString();
+	}
 	
 	String getTileName(Tile tile){
 		tile.accept(this);
