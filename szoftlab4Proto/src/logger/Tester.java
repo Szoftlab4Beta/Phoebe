@@ -87,7 +87,7 @@ public class Tester implements IColliding {
         String line = textReader.readLine();
         height = Integer.parseInt(line.substring(line.indexOf("<") + 1, line.indexOf(">")));
         width = Integer.parseInt(line.substring(line.indexOf("<", line.indexOf(">")) + 1, line.indexOf(">", (line.indexOf("<", line.indexOf(">"))))));
-        textReader.close();
+        textReader.close();        
 	}
 	
 	void setTurn(String dir, String patch){

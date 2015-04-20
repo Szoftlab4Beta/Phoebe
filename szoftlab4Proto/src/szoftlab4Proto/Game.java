@@ -63,7 +63,7 @@ public class Game {
 		
 		try {
 			mapFactory.setFile(mapFile);
-			ret = mapFactory.buildMap();
+			ret = mapFactory.buildMap(updateables);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

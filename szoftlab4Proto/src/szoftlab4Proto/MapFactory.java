@@ -24,7 +24,7 @@ public class MapFactory {
         spawnTiles = new ArrayList<Tile>();
     }
 
-    public Tile[][] buildMap() throws IOException {
+    public Tile[][] buildMap(List<IUpdateable> updateables) throws IOException {
         int horizontal;
         int vertical;
         char[][] map;
@@ -71,6 +71,7 @@ public class MapFactory {
                         tileSet[i][j] = no;
                         Oil o = new Oil(no);
                         no.setPatch(o);
+                        updateables.add(o);
                         break;
                     case 'G':
                         NormalTile ng = new NormalTile();
