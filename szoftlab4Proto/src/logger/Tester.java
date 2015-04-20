@@ -50,9 +50,11 @@ public class Tester implements IColliding {
 		for(int i = 0; i < lineCount; i++){
 			currentLine = expReader.readLine();
 			cmdOut = cmdOutReader.readLine();
-			if((currentLine == null && cmdOut != null) || !currentLine.equals(cmdOut)){
-				System.out.println("Mismatch in line " + i + "-> command output = " + cmdOut + " expected = " + currentLine);
-				return;
+			if(currentLine == null || !currentLine.equals(cmdOut)){
+				if(currentLine != cmdOut){
+					System.out.println("Mismatch in line " + i + "-> command output = " + cmdOut + " expected = " + currentLine);
+					return;
+				}
 			}
 		}
 		System.out.println("CONGRATS the expected output perfectly matches the output");
