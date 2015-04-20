@@ -26,7 +26,7 @@ public class Game {
 		
 	}
 	
-//	void mainLoop() {						//TODO asszem ezt jelenleg a testFileok irĂˇnyĂ­tjĂˇk (nincs rĂˇ igazĂˇn szĂĽksĂ©g csak osztĂˇlyba foglaltam)
+//	void mainLoop() {						//TODO asszem ezt jelenleg a testFileok irányítják (nincs rá igazán szükség csak osztályba foglaltam)
 //		int winner = testWinConditions();
 //		while (winner < 0){
 //			currentRobot = 0;
