@@ -141,6 +141,7 @@ public class Game {
 			for (Robot element : robots) {
 			    if (max < element.getDistance()){
 			    	winner = index;
+			    	max = element.getDistance();
 			    }
 			    index++;
 			}
