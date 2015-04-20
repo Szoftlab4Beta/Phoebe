@@ -71,7 +71,7 @@ public class Tester implements IColliding {
 		} else if(cmdValues[0].equals("listRobot")){
 			return listRobot();
 		} else if(cmdValues[0].equals("spawnJanitor")){
-			game.spawnJanitor(tiles[Integer.parseInt(cmdValues[1])][Integer.parseInt(cmdValues[2])]);
+			game.spawnJanitor(tiles[Integer.parseInt(cmdValues[2])][Integer.parseInt(cmdValues[1])]);
 		} else if(cmdValues[0].equals("listJanitor")){
 			return "listJanitor";
 		}
