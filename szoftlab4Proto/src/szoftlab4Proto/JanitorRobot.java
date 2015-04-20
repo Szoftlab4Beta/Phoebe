@@ -44,7 +44,6 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		Tile ret=position;
 		for(int i=0;i<pathQueue.size();++i)
 		{
-			if(ret.getTile(pathQueue.get(i)) != null)
 			ret=ret.getTile(pathQueue.get(i));
 		}
 		
@@ -161,7 +160,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			position.removeObject(this);
 			position=position.getTile(opp);
 			position.addObject(this);
-			position.getTile(opp).accept(this);
+			position.accept(this);
 		}
 	}
 
