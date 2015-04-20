@@ -26,7 +26,7 @@ public class Game {
 		
 	}
 	
-//	void mainLoop() {						//TODO asszem ezt jelenleg a testFileok irányítják (nincs rá igazán szükség csak osztályba foglaltam)
+//	void mainLoop() {						//TODO asszem ezt jelenleg a testFileok irĂˇnyĂ­tjĂˇk (nincs rĂˇ igazĂˇn szĂĽksĂ©g csak osztĂˇlyba foglaltam)
 //		int winner = testWinConditions();
 //		while (winner < 0){
 //			currentRobot = 0;
@@ -134,7 +134,7 @@ public class Game {
 	public int testWinConditions(){
 		int winner = -1;
 		int index = 0;
-		int max = 0;
+		int max = -1;
 		
 		
 		if (currentTurn == turns){
@@ -157,11 +157,13 @@ public class Game {
 		return winner;
 	}
 	
-	public void spawnJanitor(Tile spawnTile){
+	public JanitorRobot spawnJanitor(Tile spawnTile){
 		JanitorRobot r = new JanitorRobot(spawnTile);
 		updateables.add(r);
 		moveables.add(r);
 		janitorCount++;
+		
+		return r;
 	}
 	
 	void ereaseDeadObjects(){
