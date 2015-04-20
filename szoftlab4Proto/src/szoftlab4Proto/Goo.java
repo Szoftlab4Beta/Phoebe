@@ -1,15 +1,34 @@
 package szoftlab4Proto;
 
+/**
+ * Goo - Ragacs
+ * 
+ * Felelősség : Ez a ragacs osztálya, ha ilyen mezőre érkezik a robot, 
+ * akkor elveszti sebességének a felét.
+ */
 public class Goo extends Patch{
 
 	static float maxDurability;
 
+	/**
+	 * Létrehozza a paraméterül kapott mezőn a ragacsfoltot, majd inicializálja
+	 * annak értékeit.
+	 * @param Tile position
+	 */
 	public Goo(Tile position) {
 		super(position);
 		maxDurability = 4;
 		durability = maxDurability;
 	}
 	
+	/**
+	 * Csökkenti a Ragacsfolt élettartamát a paraméterül (value) kapott értékkel.
+	 * Amennyiben az élettartalma 0, megszünteti azt.
+	 * Ezekután visszatér az 'élettartam' értékével (durability)
+	 * 
+	 * @param float value
+	 * @return float durability 
+	 */
 	@Override
 	public float decDurabilityBy(float value){
 		super.decDurabilityBy(value);
@@ -18,6 +37,11 @@ public class Goo extends Patch{
 		return durability;
 	}
 	
+	/**
+	 * Visszaadja a ragacsfolt lehetséges maximális 'élettertamát'.
+	 * 
+	 * @return float maxDurability - Maximális élettartam
+	 */
 	public float getMaxDurability(){
 		return maxDurability;
 	}
