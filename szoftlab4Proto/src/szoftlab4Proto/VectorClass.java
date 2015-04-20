@@ -15,7 +15,7 @@ public class VectorClass {
 			case East:
 				return West;
 			case South:
-				return South;
+				return North;
 			case West:
 				return East;
 			default:
