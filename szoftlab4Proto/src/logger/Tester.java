@@ -18,7 +18,7 @@ public class Tester implements IColliding {
 	File cmd, expected;
 	public Game game;
 	BufferedReader cmdReader, expReader;
-	List<JanitorRobot> janitors = new ArrayList<JanitorRobot>();
+	List<JanitorRobot> janitors;
 	Tile[][] tiles;
 	int height, width;
 	
@@ -34,6 +34,7 @@ public class Tester implements IColliding {
 		if(game == null){
 			throw new NullPointerException("Logger.game has to be assigned");
 		}
+		janitors = new ArrayList<JanitorRobot>();
 		cmdReader = new BufferedReader(new FileReader(cmd));
 		expReader = new BufferedReader(new FileReader(expected));
 		currentLine = cmdReader.readLine();
