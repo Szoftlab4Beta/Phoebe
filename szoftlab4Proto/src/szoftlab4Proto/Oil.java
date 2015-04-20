@@ -50,12 +50,18 @@ public class Oil extends Patch implements IUpdateable{
 	@Override
 	public UpdateReturnCode update() {
 		decDurabilityBy(maxDurability/cleanTime);
-		if(durability <= 0)
+		if(durability <= 0) {
+			dispose();
 			return UpdateReturnCode.Died;
+		}
 		return UpdateReturnCode.Alive;
 	}
 	
-	
+	@Override
+	public void dispose() {
+		if(((NormalTile)position).getPatch()==this)
+			((NormalTile)position).setPatch(null);
+	}
 	
 	
 }
