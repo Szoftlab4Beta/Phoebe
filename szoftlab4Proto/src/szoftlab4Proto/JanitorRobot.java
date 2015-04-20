@@ -21,7 +21,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		searchNearestPatch();
 	}
 	
-	void searchNearestPatch()
+	private void searchNearestPatch()
 	{
 		StartNode s=new StartNode(position);
 		
@@ -37,6 +37,17 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	public JanitorWorkState getWorkState()
 	{
 		return workState;
+	}
+	
+	public Tile getDestination()
+	{
+		Tile ret=position;
+		for(int i=0;i<pathQueue.size();++i)
+		{
+			ret=ret.getTile(pathQueue.get(i));
+		}
+		
+		return ret;
 	}
 
 	@Override
@@ -109,6 +120,9 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		
 		for(IAcceptor o : t.getObjects())
 		{
+			if(o==this)
+				continue;
+			
 			o.accept(this);
 			if(position!=t)
 				break;
