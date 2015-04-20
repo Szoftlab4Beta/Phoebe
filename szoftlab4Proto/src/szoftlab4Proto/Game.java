@@ -8,6 +8,13 @@ import szoftlab4Proto.VectorClass.Direction;
 import szoftlab4Proto.MapFactory;
 import szoftlab4Proto.Robot;
 
+/**
+ * Game Osztály
+ * 
+ * Felelősség: A program inicializálása, új játék indítása,
+ * valamint annak levezénylése. A játékosok számának, robotjainak nyilvántartása
+ * valamint egyéb a játékmenethez köthető információk tárolása, kezelése.
+ */
 public class Game {
 	
 	MapFactory mapFactory;
@@ -24,30 +31,21 @@ public class Game {
 	
 	public Game(){
 		
-	}
-	
-//	void mainLoop() {						//TODO asszem ezt jelenleg a testFileok irányítják (nincs rá igazán szükség csak osztályba foglaltam)
-//		int winner = testWinConditions();
-//		while (winner < 0){
-//			currentRobot = 0;
-//			
-//			for (Robot element : robots) {
-//				int direction = -1;
-//				int type = -1;
-//								
-//			    setTurn(
-//			    		VectorClass.Direction.values()[direction],
-//			    		Patch.PatchType.values()[type]
-//			    				);
-//			    currentRobot++;
-//			}
-//			nextTurn();
-//		    winner = testWinConditions();
-//		    ereaseDeadObjects();
-//			spawnJanitor(mapFactory.getNextSpawn());
-//		}
-//	}
+	}//end Game()
 		
+	
+	/**
+	 * Új játék indítása
+	 * 
+	 * Beállítja a maximálisan megengedett körök számát (turns), 
+	 * játékosok számát (playerNum), létrehozza az azokhoz tartozó robotokat,
+	 * valamint betölteti és inicializáltatja a pályát a mapFactory objektummal.
+	 * 
+	 * @param playerNum - A játékosok száma
+	 * @param turns - Játék köreinek száma
+	 * @param mapFile - A térkép fájl neve
+	 * @return Tile[][] - A pálya mezői
+	 */
 	public Tile[][] newGame(int playerNum, int turns, String mapFile){
 		Tile[][] ret = null;
 		int startGoo = 3;
@@ -78,10 +76,19 @@ public class Game {
 			updateables.add(r);
 			moveables.add(r);
 		}
-		//mainLoop(); //TODO same
 		return ret;
-	}
+	}//end newGame()
 	
+	/**
+	 * Kör akcióinak beállítása
+	 * 
+	 * A jelenleg soronlévő (currentRobot) robot sebességének módosítása és a
+	 * lerakandó folt típusának beállítása a kapott fügvény paramétereken keresztül,
+	 * a robot modifySpeed és placePatch nevű függvényeinek meghívásával.
+	 * 
+	 * @param d - Direction
+	 * @param p - PatchType
+	 */
 	public void setTurn(Direction d, PatchType p){
 		Robot robot = robots.get(currentRobot);
 		if (d != VectorClass.Direction.None) {
@@ -96,8 +103,17 @@ public class Game {
 				updateables.add(o);
 		}
 		currentRobot++;
-	}
+	}//end setTurn()
 	
+	
+	/**
+	 * Kör léptetése
+	 * 
+	 * A kör végén hívódik meg, elvégzi a kör végi módosításokat,
+	 * Frissíti az updateables, deadOjects listákat
+	 * lépteti a robotokat - MoveableFieldObject.move()
+	 * olajfoltokat szárítja - IUpdateable.update()
+	 */
 	public void nextTurn(){
 		for (MoveableFieldObject element : moveables) {
 		    element.move();
@@ -129,8 +145,18 @@ public class Game {
 		}
 	    currentRobot = 0;
 		currentTurn++;
-	}
+	}//end nextTurn()
 	
+	
+	/**
+	 * Győzelmi feltételek teztelése
+	 * 
+	 * Megvizsgálja, hogy valamelyik robot teljesítette-e a győzelem valamely feltételét
+	 * (Célba ért/Lejárt az idő és a legnagyobb távot tette meg) 
+	 * majd visszatér a győztes robot indexével. Ha pedig nem volt győztes -1el
+	 * 
+	 * @return int - Winner, Győztes robot indexe (vagy -1)
+	 */
 	public int testWinConditions(){
 		int winner = -1;
 		int index = 0;
@@ -156,8 +182,16 @@ public class Game {
 		}
 		
 		return winner;
-	}
+	}//end testWinConditions()
 	
+	
+	/**
+	 * Janitor robotot hoz létre a paraméterül kapott mezőn majd viszszatér
+	 * a janitorRobot objektumával
+	 * 
+	 * @param spawnTile - Egy mező ahol éledhet a JanitorRobot
+	 * @return JanitorRobot r - A létrehozott JanitorRobot
+	 */
 	public JanitorRobot spawnJanitor(Tile spawnTile){
 		JanitorRobot r = new JanitorRobot(spawnTile);
 		updateables.add(r);
@@ -165,18 +199,32 @@ public class Game {
 		janitorCount++;
 		
 		return r;
-	}
+	} // end spawnJanitor()
 	
+	
+	/**
+	 *  Halott objektumok törlése
+	 */
 	void ereaseDeadObjects(){
 		deadObjects.clear();
-	}
+	}// end ereaseDeadObjects()
 	
+	
+	/**
+	 * Visszaadja a játékosok számát.
+	 * @return int playerNum - Játékosok száma
+	 */
 	public int getPlayerNum(){
 		return playerNum;
-	}
+	}//end getPlayerNum()
 	
+	/**
+	 * Visszaadja a paraméterül kapott indexü robot objektumát.
+	 * @param idx
+	 * @return Robot - Adott indexű robot
+	 */
 	public Robot getRobot(int idx){
 		return robots.get(idx);
-	}
+	}//end getRobot()
 
 }
