@@ -50,7 +50,7 @@ public class Tester implements IColliding {
 		for(int i = 0; i < lineCount; i++){
 			currentLine = expReader.readLine();
 			cmdOut = cmdOutReader.readLine();
-			if(currentLine == null || !currentLine.equals(cmdOut)){
+			if((currentLine == null && cmdOut != null) || !currentLine.equals(cmdOut)){
 				System.out.println("Mismatch in line " + i + "-> command output = " + cmdOut + " expected = " + currentLine);
 				return;
 			}
@@ -76,7 +76,7 @@ public class Tester implements IColliding {
 		} else if(cmdValues[0].equals("spawnJanitor")){
 			janitors.add(game.spawnJanitor(tiles[Integer.parseInt(cmdValues[2])][Integer.parseInt(cmdValues[1])]));
 		} else if(cmdValues[0].equals("listJanitor")){
-			return "listJanitor";
+			return listJanitor();
 		}
 		return null;
 	}
