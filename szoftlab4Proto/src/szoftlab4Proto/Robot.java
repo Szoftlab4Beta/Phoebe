@@ -106,8 +106,6 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 
 	@Override
 	public void collide(JanitorRobot r) {
-		r.dead = true;
-		placePatch(PatchType.Oil);
 	}
 
 	@Override
