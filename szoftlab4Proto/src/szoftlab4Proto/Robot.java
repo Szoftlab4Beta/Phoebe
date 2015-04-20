@@ -7,8 +7,8 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 
 	VectorClass speed, distance;
 	int gooAmount, oilAmount;
-	boolean canChangeSpeed;
-	boolean atFinish;
+	boolean canChangeSpeed  = true;
+	boolean atFinish = false;
 	
 	public Robot(Tile spawnTile, int startGoo, int startOil){
 		super(spawnTile);
@@ -19,7 +19,8 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 	}
 	
 	public void modifySpeed(Direction d){
-		speed.add(d);
+		if(canChangeSpeed)
+			speed.add(d);
 	}
 	
 	public Patch placePatch(PatchType type){
@@ -112,6 +113,7 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 	@Override
 	public void move() {
 		position.removeObject(this);
+		canChangeSpeed = true;
 		for (Direction d : speed.vector.keySet()){
 			for(int i = 0; d != Direction.None && i < speed.vector.get(d); i++)
 				position = position.getTile(d);
