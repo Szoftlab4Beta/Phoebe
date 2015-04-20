@@ -1,10 +1,19 @@
 package szoftlab4Proto;
 
+/**
+ * Absztrakt ősosztály az összes olyan Osztály egységbe foglalására, amik mezőkön helyezkedhetnek el
+ * 
+ *
+ */
 public abstract class FieldObject implements IAcceptor{
 
-	Tile position;
+	Tile position;		//Tile which holds this Object
 	boolean dead;
 	
+	/**
+	 * Konstruktor, ami a megadott mezőn létrehozza az Objektumot (a mezőhöz nem regisztrálja be, az a leszármazottak felelőssége)
+	 * @param position
+	 */
 	public FieldObject(Tile position){
 		this.position = position;
 		dead = false;
@@ -14,8 +23,13 @@ public abstract class FieldObject implements IAcceptor{
 		position = t;
 	}
 	
+	/**
+	 * Visszaadja az objektum pozícióját
+	 * @return
+	 * @throws NullPointerException
+	 */
 	public Tile getPosition() throws NullPointerException{
-		if(position == null)		//TODO: lehet itt kell dead = true; ? majd kiderül
+		if(position == null)
 			throw new NullPointerException();
 		return position;
 	}
@@ -28,6 +42,9 @@ public abstract class FieldObject implements IAcceptor{
 		return dead;
 	}
 	
+	/**
+	 * Eltávolítja az objektumot a tartalmazó mezőről
+	 */
 	public void dispose(){
 		position.removeObject(this);
 	}
