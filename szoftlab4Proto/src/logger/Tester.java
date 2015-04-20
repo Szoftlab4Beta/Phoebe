@@ -135,8 +135,8 @@ public class Tester implements IColliding {
 	}
 	
 	String getTilePos(Tile tile){
-		for(int i = 0; i < height - 1; i++){
-			for(int j = 0; j < width - 1; j++){
+		for(int i = 0; i < height; i++){
+			for(int j = 0; j < width; j++){
 				if(tile.equals(tiles[i][j]))
 					return "<" + j + "," + i + ">";
 			}
