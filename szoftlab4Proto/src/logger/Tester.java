@@ -121,12 +121,17 @@ public class Tester implements IColliding {
 		for(int i = 0; i < maxIndex;){
 			JanitorRobot r = janitors.get(i);
 			if(r.isDead())
+			{
 				janitors.remove(i);
+			}
 			else 
 			{
 				NormalTile d = (NormalTile)r.getDestination();
-				builder.append("<" + i + ">" + getTilePos(r.getPosition()) + "<" + d.getPatch().getDurability() + ">" + getTilePos(d));
+				builder.append("<" + i + ">" + getTilePos(r.getPosition()) + "<" + 
+						(d.getPatch() == null ? 0 : (int)d.getPatch().getDurability()) + ">" + getTilePos(d) + "\n");
+				i++;
 			}
+			maxIndex = janitors.size();
 		}
 		return builder.toString();
 	}
@@ -137,8 +142,8 @@ public class Tester implements IColliding {
 	}
 	
 	String getTilePos(Tile tile){
-		for(int i = 0; i < height; i++){
-			for(int j = 0; j < width; j++){
+		for(int i = 0; i < width; i++){
+			for(int j = 0; j < height; j++){
 				if(tile.equals(tiles[i][j]))
 					return "<" + j + "," + i + ">";
 			}
