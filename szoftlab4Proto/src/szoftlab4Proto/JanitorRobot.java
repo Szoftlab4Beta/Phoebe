@@ -75,7 +75,10 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			if(pathQueue.isEmpty())
 				workState=JanitorWorkState.WorkStarted;
 		}
+		
+		if(pathQueue.isEmpty())
 			position.accept(this);
+		
 		bounced=false;
 		
 		return isDead() ? UpdateReturnCode.JanitorDied : UpdateReturnCode.Alive;
