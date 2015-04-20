@@ -12,6 +12,7 @@ public class StartNode extends Node
 		super(null, Direction.None);
 		tile=t;
 		level=0;
+		tileList=new ArrayList<Tile>();
 	}
 	
 	//@Override
