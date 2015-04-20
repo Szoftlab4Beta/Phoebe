@@ -5,7 +5,7 @@ public abstract class Patch extends FieldObject implements IColliding
 	public enum PatchType{None, Goo, Oil};
 	
 	protected float durability;
-	public static int cleanTime = 2;
+	public static int cleanTime = 4;
 	
 	public Patch(Tile position)
 	{
