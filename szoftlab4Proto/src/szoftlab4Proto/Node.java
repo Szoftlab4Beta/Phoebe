@@ -42,7 +42,12 @@ public class Node
 				Stack<Direction> ret=n.extendToNextLevel();
 				
 				if(ret!=null)
+				{
+					if(dirToParent!=Direction.None)
+						ret.add(dirToParent);
+					
 					return ret;
+				}
 			}
 			
 			return null;
@@ -64,7 +69,8 @@ public class Node
 					{
 						Stack<Direction> ret=new Stack<Direction>();
 						ret.push(d);
-						ret.push(dirToParent.getOpposite());
+						if(dirToParent!=Direction.None)
+							ret.push(dirToParent.getOpposite());
 						
 						return ret;
 					}
