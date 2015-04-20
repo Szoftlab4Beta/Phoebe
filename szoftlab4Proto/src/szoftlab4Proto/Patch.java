@@ -12,6 +12,7 @@ public abstract class Patch extends FieldObject implements IColliding
 		super(position);
 	}
 	
+	
 	public static int getCleanTime()
 	{
 		return cleanTime;
@@ -30,6 +31,9 @@ public abstract class Patch extends FieldObject implements IColliding
 		return durability;
 	}
 	
+	/**
+	 * Eltávolítja magát a pozíciómezejének nyilvántartásából.
+	 */
 	public void dispose()
 	{
 		if(((NormalTile)position).getPatch()==this)

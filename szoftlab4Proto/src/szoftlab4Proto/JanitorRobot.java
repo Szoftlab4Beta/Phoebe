@@ -8,11 +8,18 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 {
 	public enum JanitorWorkState{Searching, WorkStarted, Working};
 	
-	JanitorWorkState workState;
-	Stack<Direction> pathQueue;
-	boolean bounced;
-	Tile destination;
+	JanitorWorkState workState; //A takarítórobot állapota, amely jelzi, hogy épp milyen tevékenységet végez
+	Stack<Direction> pathQueue; //A legközelebbi folthoz vezető utat irányok szerint eltároló lista
+	boolean bounced; //Megmutatja, hogy a jelenlegi kör alatt visszapattant-e már a takarítórobot
+	Tile destination; //A legközelebbi foltot tartalmazó mezőre mutató referencia
 	
+	/**
+	 * Létrehoz egy takarítórobotot, és inicializálja azt.
+	 * 
+	 * A robot a létrejöttekor foltkereső (Searching) módban van.
+	 * 
+	 * @param position Az a pozíció, amelyen a robot a létrejötte után tartózkodik
+	 */
 	public JanitorRobot(Tile position)
 	{
 		super(position);
@@ -23,6 +30,9 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		searchNearestPatch();
 	}
 	
+	/**
+	 * Megkeresi a tisztítórobothoz legközelebb lévő foltot, és eltárolja az ahhoz vezető útvonalat, valamint a célmezőt (amelyen a folt van).
+	 */
 	private void searchNearestPatch()
 	{
 		StartNode s=new StartNode(position);
@@ -57,7 +67,16 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	{
 		colliding.collide(this);
 	}
-
+	
+	/**
+	 * Frissíti a robot állapotát, elvégzi az esetleges interakciók lebonyolítását a pozícióján lévő többi objektummal.
+	 * 
+	 * Amennyiben a robot leesett a pályáról vagy érvénytelen mezőre került, meghal.
+	 * Akkor, ha a robot elérte a destination mezőt, elkezdi a mezőn lévő folt feltakarítását (és Searching módból WorkStarted módba vált).
+	 * A robot Working módba vált, ha előtte WorkStarted módban volt.
+	 * 
+	 * @return Információ arra vonatkozóan, hogy a takarítórobot túlélte-e a kört.
+	 */
 	@Override
 	public UpdateReturnCode update()
 	{
@@ -89,7 +108,12 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		
 		return isDead() ? UpdateReturnCode.JanitorDied : UpdateReturnCode.Alive;
 	}
-
+	
+	/**
+	 * Takarítja a megadott olajfoltot, és amennyiben a folt eltűnt ennek következtében, új takarítandó foltot keres.
+	 * 
+	 * @param p Az az olajfolt, amellyel a robot interakcióba lép
+	 */
 	@Override
 	public void collide(Oil p)
 	{
@@ -101,6 +125,12 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		}
 	}
 
+	
+	/**
+	 * Takarítja a megadott ragacsfoltot, és amennyiben a folt eltűnt ennek következtében, új takarítandó foltot keres.
+	 * 
+	 * @param p Az a ragacsfolt, amellyel a robot interakcióba lép
+	 */
 	@Override
 	public void collide(Goo p)
 	{
@@ -111,7 +141,13 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			searchNearestPatch();
 		}
 	}
-
+	
+	
+	/**
+	 * Interakcióba lép a mezőn lévő objektumokkal, és ha dolgozó (WorkStarted | Working) módban van, feltakarítja a pozícióján lévő foltot.
+	 * 
+	 * @param t Az a mező, amellyel a robot interakcióba lép
+	 */
 	@Override
 	public void collide(NormalTile t)
 	{
@@ -145,13 +181,26 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	{
 		//Nem létezik ilyen eset
 	}
-
+	
+	/**
+	 * Amennyiben a takarítórobot ilyen mezőre lép, meghal.
+	 * 
+	 * @param p Az az EndOfField típusú mező, amellyel a robot interakcióba lép
+	 */
 	@Override
 	public void collide(EndOfField t)
 	{
 		setDead();
 	}
-
+	
+	/**
+	 * Elvégzi egy robottal való ütközés lebonyolítását.
+	 * 
+	 * Abban az esetben, ha dolgozó (Working) állapotban volt vagy már visszapattant ebben a körben, megsemmisül az ütközés következtében.
+	 * Egyébként visszapattan az előző pozíciójába.
+	 * 
+	 * @param r Az a robot, amellyel a takarítórobot interakcióba lép
+	 */
 	@Override
 	public void collide(Robot r)
 	{
@@ -174,7 +223,14 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			position.accept(this);
 		}
 	}
-
+	
+	/**
+	 * Elvégzi egy másik tisztítórobottal való ütközés lebonyolítását.
+	 * 
+	 * Az ütközés következtében visszapattan az előző pozíciójába, vagy amennyiben már ütközött ebben a körben, megsemmisül.
+	 * 
+	 * @param r Az a tisztítórobot, amellyel ez interakcióba lép
+	 */
 	@Override
 	public void collide(JanitorRobot r)
 	{
@@ -198,7 +254,11 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			position.getTile(opp).accept(this);
 		}
 	}
-
+	
+	/**
+	 * Elvégzi a tisztítórobot mozgatását a legközelebbi folthoz vezető eltárolt út alapján.
+	 * Amennyiben nincs ilyen út, a robot a jelenlegi pozícióján marad.
+	 */
 	@Override
 	public void move()
 	{
@@ -213,6 +273,9 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			((NormalTile)newPos).addObject(this);
 	}
 	
+	/**
+	 * Eltávolítja a robotot a pozíciójának megfelelő mezőn lévő objektumok listájából.
+	 */
 	@Override
 	public void dispose()
 	{

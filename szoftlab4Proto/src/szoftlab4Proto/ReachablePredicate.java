@@ -3,6 +3,10 @@ package szoftlab4Proto;
 class ReachablePredicate implements Predicate<Tile>, IColliding
 {
 	private boolean reachable;
+	
+	/**
+	 * @return Az érték true, ha a paraméterként kapott mezőre ráléphet egy JanitorRobot a folt keresése közben, és false, ha nem
+	 */
 	@Override
 	public boolean test(Tile t)
 	{
