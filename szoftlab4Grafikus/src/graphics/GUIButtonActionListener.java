@@ -49,9 +49,10 @@ public class GUIButtonActionListener implements ActionListener {
 			dir = Direction.None;
 		}
 		else if(buttonMsg.equals("NewGame")){
+			window.cleanUp();
 			window.show();
-			game.newGame(window.getPlayerNum(), window.getTurns(), window.getMapFile());
 			window.setMapImage();
+			game.newGame(window.getPlayerNum(), window.getTurns(), window.getMapFile());
 		}
 			
 	}

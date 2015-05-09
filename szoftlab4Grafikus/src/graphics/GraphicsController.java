@@ -253,7 +253,7 @@ public class GraphicsController {
 				if(contents == null){
 					continue;
 				}
-				int layer = 0;
+				int layer = 1;
 				for (ImageID imageID : contents) {
 					JLabel label = new JLabel(sprites.get(imageID));
 					tilePanel.add(label, BorderLayout.CENTER);
@@ -277,5 +277,16 @@ public class GraphicsController {
 	public void resetButtons() {
 		patchButtons.clearSelection();
 		noneRadioButton.setSelected(true);
+	}
+
+	public void cleanUp() {
+		mapContentPane.removeAll();
+		
+		mapImageLabel = new JLabel("");
+		mapImageLabel.setBounds(0, 0, 881, 705);
+		mapImageLabel.setBackground(new Color(0, 0, 0, 0));		
+		mapContentPane.add(mapImageLabel);
+		mapContentPane.setLayer(mapImageLabel, 0);
+		mapImageLabel.setIcon(null);
 	}
 }
