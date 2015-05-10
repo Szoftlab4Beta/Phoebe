@@ -88,12 +88,14 @@ public class VectorClass {
 
 	public static VectorClass average(VectorClass v1, VectorClass v2) {
 		VectorClass tmp = new VectorClass();
+		float f;
 		for (Direction d : Direction.values()) {
 			tmp.vector.put(d, v1.vector.get(d) + v2.vector.get(d));
 		}
 		tmp.normalize();
 		for (Direction d: Direction.values()) {
-			tmp.vector.put(d, tmp.vector.get(d)/2);
+			f = tmp.vector.get(d) / 2f;
+			tmp.vector.put(d, (int)Math.ceil(f));
 		}
 		return tmp;
 	}

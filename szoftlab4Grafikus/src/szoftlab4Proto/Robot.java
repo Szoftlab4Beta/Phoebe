@@ -129,7 +129,8 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 		if(p != null)
 			p.accept(this);
 		for(IAcceptor object : t.getObjects()){
-			object.accept(this);
+			if(!object.equals(this))
+				object.accept(this);
 		}
 	}
 
