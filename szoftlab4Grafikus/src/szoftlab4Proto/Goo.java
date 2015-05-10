@@ -22,7 +22,7 @@ public class Goo extends Patch{
 		super(position);
 		maxDurability = 4;
 		durability = maxDurability;
-		graphics = new GraphicsObject(ImageID.Goo0);
+		graphics = new GraphicsObject(ImageID.Goo2);
 	}
 	
 	/**
@@ -38,10 +38,12 @@ public class Goo extends Patch{
 		super.decDurabilityBy(value);
 		if(durability < 0)
 			this.dispose();
-		else if(durability < 1)
-			graphics.image = ImageID.Goo2;
 		else if(durability < 2)
+			graphics.image = ImageID.Goo0;
+		else if(durability < 3)
 			graphics.image = ImageID.Goo1;
+		else if(durability < 4)
+			graphics.image = ImageID.Goo2;
 		return durability;
 	}
 	

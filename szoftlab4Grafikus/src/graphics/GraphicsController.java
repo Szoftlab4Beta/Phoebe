@@ -62,10 +62,10 @@ public class GraphicsController {
 		
 		sprites.put(ImageID.Oil0, new ImageIcon(App.asFilePath("pictures", "oil1", "png")));
 		sprites.put(ImageID.Oil1, new ImageIcon(App.asFilePath("pictures", "oil2", "png")));
-		sprites.put(ImageID.Oil2, new ImageIcon(App.asFilePath("pictures", "oil2", "png")));
-		sprites.put(ImageID.Goo0, new ImageIcon(App.asFilePath("pictures", "oil3", "png")));
-		sprites.put(ImageID.Goo1, new ImageIcon(App.asFilePath("pictures", "oil3", "png")));
-		sprites.put(ImageID.Goo2, new ImageIcon(App.asFilePath("pictures", "oil3", "png")));
+		sprites.put(ImageID.Oil2, new ImageIcon(App.asFilePath("pictures", "oil3", "png")));
+		sprites.put(ImageID.Goo0, new ImageIcon(App.asFilePath("pictures", "goo1", "png")));
+		sprites.put(ImageID.Goo1, new ImageIcon(App.asFilePath("pictures", "goo2", "png")));
+		sprites.put(ImageID.Goo2, new ImageIcon(App.asFilePath("pictures", "goo3", "png")));
 		sprites.put(ImageID.Robot, new ImageIcon(App.asFilePath("pictures", "robot1", "png")));
 		sprites.put(ImageID.Janitor, new ImageIcon(App.asFilePath("pictures", "janitor", "png")));
 		

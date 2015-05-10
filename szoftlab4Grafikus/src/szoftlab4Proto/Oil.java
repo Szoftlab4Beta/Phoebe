@@ -11,7 +11,7 @@ public class Oil extends Patch implements IUpdateable{
 		super(position);
 		maxDurability = 4;
 		durability = maxDurability;
-		graphics = new GraphicsObject(ImageID.Oil0);
+		graphics = new GraphicsObject(ImageID.Oil2);
 	}
 
 	public float getMaxDurability(){
@@ -58,10 +58,12 @@ public class Oil extends Patch implements IUpdateable{
 			dispose();
 			return UpdateReturnCode.Died;
 		}
-		else if(durability < 1)
-			graphics.image = ImageID.Oil2;
 		else if(durability < 2)
+			graphics.image = ImageID.Oil0;
+		else if(durability < 3)
 			graphics.image = ImageID.Oil1;
+		else if(durability < 4)
+			graphics.image = ImageID.Oil2;
 		return UpdateReturnCode.Alive;
 	}
 	
