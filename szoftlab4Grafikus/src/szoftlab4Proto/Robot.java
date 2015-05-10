@@ -131,7 +131,6 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 		for(IAcceptor object : t.getObjects()){
 			object.accept(this);
 		}
-		t.addObject(this);
 	}
 
 	/**
@@ -198,6 +197,7 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 				}
 			}
 		}
+		position.addObject(this);
 		distance.add(speed);
 	}
 

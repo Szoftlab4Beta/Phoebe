@@ -136,6 +136,8 @@ public class Game {
 			graphicsController.setWinner(robots.get(winner).name);
 			return;
 		}
+		if(currentTurn % janitorSpawnInterval == janitorSpawnInterval - 1)
+			spawnJanitor(mapFactory.getNextSpawn());
 		for (MoveableFieldObject element : moveables) {
 		    element.move();
 		}
