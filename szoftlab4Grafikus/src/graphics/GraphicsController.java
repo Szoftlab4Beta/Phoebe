@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -39,6 +40,8 @@ public class GraphicsController {
 	ButtonGroup patchButtons;
 	JRadioButton noneRadioButton;
 	JLayeredPane mapContentPane;
+	JPanel controlPane;
+	JLabel turnLabel;
 	
 	private JFrame frame;
 	
@@ -52,8 +55,9 @@ public class GraphicsController {
 	private void initialize(GUIButtonActionListener listener) {
 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1024, 768);
+		frame.setBounds(100, 100, 1024, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 		
 		sprites.put(ImageID.Oil0, new ImageIcon(App.asFilePath("pictures", "oil1", "png")));
 		sprites.put(ImageID.Oil1, new ImageIcon(App.asFilePath("pictures", "oil2", "png")));
@@ -64,22 +68,22 @@ public class GraphicsController {
 		sprites.put(ImageID.Robot, new ImageIcon(App.asFilePath("pictures", "robot1", "png")));
 		sprites.put(ImageID.Janitor, new ImageIcon(App.asFilePath("pictures", "janitor", "png")));
 		
-		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.EAST);
+		controlPane = new JPanel();
+		frame.getContentPane().add(controlPane, BorderLayout.EAST);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[] {0, 0, 0, 0};
-		gbl_panel_1.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		panel_1.setLayout(gbl_panel_1);
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		controlPane.setLayout(gbl_panel_1);
 		
-		currentRobot = new JLabel("Robot 1");
+		currentRobot = new JLabel("Robot 0");
 		GridBagConstraints gbc_lblRobot = new GridBagConstraints();
 		gbc_lblRobot.gridwidth = 3;
-		gbc_lblRobot.insets = new Insets(0, 0, 5, 5);
+		gbc_lblRobot.insets = new Insets(0, 0, 5, 0);
 		gbc_lblRobot.gridx = 0;
 		gbc_lblRobot.gridy = 0;
-		panel_1.add(currentRobot, gbc_lblRobot);
+		controlPane.add(currentRobot, gbc_lblRobot);
 		
 		noneRadioButton = new JRadioButton("None");
 		noneRadioButton.setOpaque(false);
@@ -91,7 +95,7 @@ public class GraphicsController {
 		gbc_noneRadioButton.insets = new Insets(0, 0, 5, 5);
 		gbc_noneRadioButton.gridx = 1;
 		gbc_noneRadioButton.gridy = 1;
-		panel_1.add(noneRadioButton, gbc_noneRadioButton);
+		controlPane.add(noneRadioButton, gbc_noneRadioButton);
 		
 		JRadioButton oilRadioButton = new JRadioButton("Oil");
 		oilRadioButton.addActionListener(listener);
@@ -101,7 +105,7 @@ public class GraphicsController {
 		gbc_oilRadioButton.insets = new Insets(0, 0, 5, 5);
 		gbc_oilRadioButton.gridx = 1;
 		gbc_oilRadioButton.gridy = 2;
-		panel_1.add(oilRadioButton, gbc_oilRadioButton);
+		controlPane.add(oilRadioButton, gbc_oilRadioButton);
 		
 		JRadioButton gooRadioButton = new JRadioButton("Goo");
 		gooRadioButton.addActionListener(listener);
@@ -111,7 +115,7 @@ public class GraphicsController {
 		gbc_gooRadioButton.insets = new Insets(0, 0, 5, 5);
 		gbc_gooRadioButton.gridx = 1;
 		gbc_gooRadioButton.gridy = 3;
-		panel_1.add(gooRadioButton, gbc_gooRadioButton);
+		controlPane.add(gooRadioButton, gbc_gooRadioButton);
 		
 		patchButtons = new ButtonGroup();
 		patchButtons.add(noneRadioButton);
@@ -126,7 +130,7 @@ public class GraphicsController {
 		gbc_upButton.insets = new Insets(0, 0, 5, 5);
 		gbc_upButton.gridx = 1;
 		gbc_upButton.gridy = 6;
-		panel_1.add(upButton, gbc_upButton);
+		controlPane.add(upButton, gbc_upButton);
 		
 		JButton leftButton = new JButton("");
 		leftButton.setIcon(new ImageIcon(App.asFilePath("pictures", "LarrowImage", "png")));
@@ -137,7 +141,7 @@ public class GraphicsController {
 		gbc_leftButton.anchor = GridBagConstraints.WEST;
 		gbc_leftButton.gridx = 0;
 		gbc_leftButton.gridy = 7;
-		panel_1.add(leftButton, gbc_leftButton);
+		controlPane.add(leftButton, gbc_leftButton);
 		
 		JButton middleButton = new JButton("");
 		middleButton.setIcon(new ImageIcon(App.asFilePath("pictures", "xIcon", "png")));
@@ -147,7 +151,7 @@ public class GraphicsController {
 		gbc_middleButton.insets = new Insets(0, 0, 5, 5);
 		gbc_middleButton.gridx = 1;
 		gbc_middleButton.gridy = 7;
-		panel_1.add(middleButton, gbc_middleButton);
+		controlPane.add(middleButton, gbc_middleButton);
 		
 		JButton rightButton = new JButton("");
 		rightButton.setIcon(new ImageIcon(App.asFilePath("pictures", "RarrowImage", "png")));
@@ -157,7 +161,7 @@ public class GraphicsController {
 		gbc_rightButton.insets = new Insets(0, 0, 5, 0);
 		gbc_rightButton.gridx = 2;
 		gbc_rightButton.gridy = 7;
-		panel_1.add(rightButton, gbc_rightButton);
+		controlPane.add(rightButton, gbc_rightButton);
 		
 		JButton downButton = new JButton("");
 		downButton.setIcon(new ImageIcon(App.asFilePath("pictures", "DarrowImage", "png")));
@@ -167,16 +171,25 @@ public class GraphicsController {
 		gbc_downButton.insets = new Insets(0, 0, 5, 5);
 		gbc_downButton.gridx = 1;
 		gbc_downButton.gridy = 8;
-		panel_1.add(downButton, gbc_downButton);
+		controlPane.add(downButton, gbc_downButton);
 		
 		JButton confirmButton = new JButton("Confirm");
 		confirmButton.setActionCommand("Confirm");
 		confirmButton.addActionListener(listener);
 		GridBagConstraints gbc_confirmButton = new GridBagConstraints();
+		gbc_confirmButton.insets = new Insets(0, 0, 5, 0);
 		gbc_confirmButton.gridwidth = 3;
 		gbc_confirmButton.gridx = 0;
 		gbc_confirmButton.gridy = 10;
-		panel_1.add(confirmButton, gbc_confirmButton);
+		controlPane.add(confirmButton, gbc_confirmButton);
+		
+		turnLabel = new JLabel("Turn 0/30");
+		GridBagConstraints gbc_lblTurn = new GridBagConstraints();
+		gbc_lblTurn.gridwidth = 3;
+		gbc_lblTurn.insets = new Insets(0, 0, 0, 5);
+		gbc_lblTurn.gridx = 0;
+		gbc_lblTurn.gridy = 11;
+		controlPane.add(turnLabel, gbc_lblTurn);
 		
 		mapContentPane = new JLayeredPane();
 		frame.getContentPane().add(mapContentPane, BorderLayout.CENTER);
@@ -225,7 +238,7 @@ public class GraphicsController {
 	public void setMap(Tile[][] mapTiles, int width, int height){
 		int dy = frame.getHeight() - mapContentPane.getHeight();
 		int dx = frame.getWidth() - mapContentPane.getWidth();
-		frame.setSize(width * 32 + dx, height * 32 + dy);
+		frame.setSize(width * 32 + dx, (height < 400 ? 400 : height * 32 + dy));
 		mapImageLabel.setBounds(new Rectangle(0, 0, 32 * width, 32 * height));
 		Color alphaNull = new Color(0, 0, 0, 0);
 		for(int y = 0; y < height; y++){
@@ -288,5 +301,21 @@ public class GraphicsController {
 		mapContentPane.add(mapImageLabel);
 		mapContentPane.setLayer(mapImageLabel, 0);
 		mapImageLabel.setIcon(null);
+	}
+
+	public void setWinner(int winner) {
+		currentRobot.setText("Winner: Robot " + winner);
+		enableControls(false);
+	}
+	
+	public void enableControls(boolean enabled){
+		Component[] components = controlPane.getComponents();
+		for(Component component : components){
+			component.setEnabled(enabled);
+		}
+	}
+	
+	public void setTurns(int current, int max){
+		turnLabel.setText("Turn " + current + "/" + max);
 	}
 }

@@ -47,7 +47,7 @@ public class NewGameDialog extends JDialog {
 			formattedTextField.addPropertyChangeListener("value", new PropertyChangeListener() {
 				public void propertyChange(PropertyChangeEvent evt) {
 					if(evt.getNewValue() != null)
-						players = Integer.parseInt(evt.getNewValue().toString());
+						turns = Integer.parseInt(evt.getNewValue().toString());
 				}
 			});
 			contentPanel.add(formattedTextField);
@@ -69,7 +69,7 @@ public class NewGameDialog extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton newGameButton = new JButton("New Game");
@@ -77,12 +77,6 @@ public class NewGameDialog extends JDialog {
 				newGameButton.addActionListener(listener);
 				buttonPane.add(newGameButton);
 				getRootPane().setDefaultButton(newGameButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				cancelButton.addActionListener(new CancelActionListener());
-				buttonPane.add(cancelButton);
 			}
 		}
 		{
@@ -114,13 +108,6 @@ public class NewGameDialog extends JDialog {
 		if(turns <= 0)
 			return 30;
 		return turns;
-	}
-	
-	class CancelActionListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			setVisible(false);
-		}
 	}
 
 	public String getMapFile() {

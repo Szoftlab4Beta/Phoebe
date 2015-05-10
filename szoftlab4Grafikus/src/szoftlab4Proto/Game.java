@@ -73,6 +73,8 @@ public class Game {
 			e.printStackTrace();
 		}
 		graphicsController.setMap(ret, mapFactory.horizontal, mapFactory.vertical);
+		graphicsController.setTurns(0, turns);
+		graphicsController.setCurrentRobot("Robot 0");
 
 		this.playerNum = playerNum;
 		this.turns = turns;
@@ -112,9 +114,10 @@ public class Game {
 				updateables.add(o);
 		}
 		currentRobot++;
-		graphicsController.setCurrentRobot(robots.get(currentRobot).name);
 		if(currentRobot == robots.size())
 			nextTurn();
+		else
+			graphicsController.setCurrentRobot(robots.get(currentRobot).name);
 	}//end setTurn()
 	
 	
@@ -127,6 +130,11 @@ public class Game {
 	 * olajfoltokat szárítja - IUpdateable.update()
 	 */
 	public void nextTurn(){
+		int winner = testWinConditions();
+		if(winner != -1){
+			graphicsController.setWinner(winner);
+			return;
+		}
 		for (MoveableFieldObject element : moveables) {
 		    element.move();
 		}
@@ -156,8 +164,9 @@ public class Game {
 		    }
 		}
 	    currentRobot = 0;
-	    graphicsController.setCurrentRobot("Robot " + currentRobot);
-		currentTurn++;
+		graphicsController.setCurrentRobot(robots.get(currentRobot).name);
+	    currentTurn++;
+	    graphicsController.setTurns(currentTurn, turns);
 		graphicsController.redrawMap();
 	}//end nextTurn()
 	

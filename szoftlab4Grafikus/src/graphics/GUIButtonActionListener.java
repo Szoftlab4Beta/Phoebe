@@ -49,6 +49,7 @@ public class GUIButtonActionListener implements ActionListener {
 			dir = Direction.None;
 		}
 		else if(buttonMsg.equals("NewGame")){
+			window.enableControls(true);
 			window.cleanUp();
 			window.show();
 			window.setMapImage();
