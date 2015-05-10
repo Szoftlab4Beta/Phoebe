@@ -133,11 +133,6 @@ public class Game {
 	 * olajfoltokat szárítja - IUpdateable.update()
 	 */
 	public void nextTurn(){
-		int winner = testWinConditions();
-		if(winner != -1){
-			graphicsController.setWinner(robots.get(winner).name);
-			return;
-		}
 		if(((currentTurn % janitorSpawnInterval) == (janitorSpawnInterval - 1)) && (janitorCount<maxJanitorCount))
 			spawnJanitor(mapFactory.getNextSpawn());
 		for (MoveableFieldObject element : moveables) {
@@ -155,11 +150,13 @@ public class Game {
 			    }
 		    	else if (status == IUpdateable.UpdateReturnCode.JanitorDied){
 		    		moveables.remove(element);
+		    		deadObjects.add(element);
 		    		updateables.remove(index);
 		    		janitorCount--;
 			    }
 		    	else if (status == IUpdateable.UpdateReturnCode.RobotDied){
 		    		moveables.remove(element);
+		    		deadObjects.add(element);
 		    		updateables.remove(index);
 		    		robots.remove(element);
 		    		playerNum--;
@@ -167,6 +164,17 @@ public class Game {
 		    	index--;
 		    	maxIndex = updateables.size();
 		    }
+		}
+		int winner = testWinConditions();
+		if(winner == -2){
+			graphicsController.setWinner("Draw");
+			graphicsController.redrawMap();
+			return;
+		}
+		if(winner != -1){
+			graphicsController.setWinner(robots.get(winner).name);
+			graphicsController.redrawMap();
+			return;
 		}
 	    currentRobot = 0;
 		graphicsController.setCurrentRobot(robots.get(currentRobot).name);
@@ -190,6 +198,8 @@ public class Game {
 		int index = 0;
 		int max = -1;
 		
+		if(playerNum == 0)
+			return -2;
 		if(playerNum == 1)
 			return 0;
 		if (currentTurn == turns){

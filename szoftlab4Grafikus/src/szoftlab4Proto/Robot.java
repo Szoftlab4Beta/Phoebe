@@ -209,8 +209,10 @@ public class Robot extends MoveableFieldObject implements IColliding, IUpdateabl
 	@Override
 	public UpdateReturnCode update() {
 		position.accept(this);		
-		if(dead)
+		if(dead){
+			dispose();
 			return UpdateReturnCode.RobotDied;
+		}
 		return UpdateReturnCode.Alive;
 	}
 	
