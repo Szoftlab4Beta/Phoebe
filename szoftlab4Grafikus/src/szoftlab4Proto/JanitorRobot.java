@@ -90,6 +90,9 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			return UpdateReturnCode.JanitorDied;
 		}
 		
+		if(!pathQueue.isEmpty()) //FIX 2 - feljebb mozgatva
+			pathQueue.pop();
+		
 		if(((NormalTile)destination).getPatch()==null)
 		{
 			searchNearestPatch();
@@ -105,8 +108,8 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		
 		position.accept(this);
 		
-		if(!pathQueue.isEmpty())
-			pathQueue.pop();
+		/*if(!pathQueue.isEmpty())
+			pathQueue.pop();*/
 		
 		bounced=false;
 		
@@ -122,11 +125,12 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	public void collide(Oil p)
 	{
 		float decreaseAmount=p.getMaxDurability()/Patch.getCleanTime();
-		if(p.decDurabilityBy(decreaseAmount)<=0)
+		p.decDurabilityBy(decreaseAmount);
+		/*if(p.decDurabilityBy(decreaseAmount)<=0)
 		{
 			workState=JanitorWorkState.Searching;
 			searchNearestPatch();
-		}
+		}*/
 	}
 
 	
@@ -139,11 +143,12 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	public void collide(Goo p)
 	{
 		float decreaseAmount=p.getMaxDurability()/Patch.getCleanTime();
-		if(p.decDurabilityBy(decreaseAmount)<=0)
+		p.decDurabilityBy(decreaseAmount);
+		/*if(p.decDurabilityBy(decreaseAmount)<=0)
 		{
 			workState=JanitorWorkState.Searching;
 			searchNearestPatch();
-		}
+		}*/
 	}
 	
 	

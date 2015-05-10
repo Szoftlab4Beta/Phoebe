@@ -31,6 +31,7 @@ public class Game {
 	int currentRobot;
 	int janitorSpawnInterval;
 	int janitorCount;
+	int maxJanitorCount;
 	GraphicsController graphicsController;
 	
 	public Game(){
@@ -60,6 +61,7 @@ public class Game {
 		currentTurn = 0;
 		currentRobot = 0;
 		janitorCount = 0;
+		maxJanitorCount=1;
 		janitorSpawnInterval = 4;
 		
 		mapFactory = new MapFactory();
@@ -136,7 +138,7 @@ public class Game {
 			graphicsController.setWinner(robots.get(winner).name);
 			return;
 		}
-		if(currentTurn % janitorSpawnInterval == janitorSpawnInterval - 1)
+		if(((currentTurn % janitorSpawnInterval) == (janitorSpawnInterval - 1)) && (janitorCount<maxJanitorCount))
 			spawnJanitor(mapFactory.getNextSpawn());
 		for (MoveableFieldObject element : moveables) {
 		    element.move();

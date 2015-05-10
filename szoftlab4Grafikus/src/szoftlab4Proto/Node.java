@@ -72,7 +72,7 @@ public class Node
 				if(ret!=null)
 				{
 					if(dirToParent!=Direction.None)
-						ret.add(dirToParent);
+						ret.add(dirToParent.getOpposite());//ret.add(dirToParent); FIX1 - így már a helyes utat adja vissza
 					
 					return ret;
 				}
