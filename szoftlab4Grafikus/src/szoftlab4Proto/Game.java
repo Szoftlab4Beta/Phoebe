@@ -58,6 +58,7 @@ public class Game {
 		int startGoo = 3;
 		int startOil = 3;
 		currentTurn = 0;
+		currentRobot = 0;
 		janitorCount = 0;
 		janitorSpawnInterval = 4;
 		
@@ -132,7 +133,7 @@ public class Game {
 	public void nextTurn(){
 		int winner = testWinConditions();
 		if(winner != -1){
-			graphicsController.setWinner(winner);
+			graphicsController.setWinner(robots.get(winner).name);
 			return;
 		}
 		for (MoveableFieldObject element : moveables) {

@@ -304,8 +304,8 @@ public class GraphicsController {
 		mapImageLabel.setIcon(null);
 	}
 
-	public void setWinner(int winner) {
-		currentRobot.setText("Winner: Robot " + winner);
+	public void setWinner(String winner) {
+		currentRobot.setText("Winner: " + winner);
 		enableControls(false);
 	}
 	
