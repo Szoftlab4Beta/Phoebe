@@ -42,6 +42,7 @@ public class GraphicsController {
 	JLayeredPane mapContentPane;
 	JPanel controlPane;
 	JLabel turnLabel;
+	int tileSize = 32;
 	
 	private JFrame frame;
 	
@@ -238,8 +239,8 @@ public class GraphicsController {
 	public void setMap(Tile[][] mapTiles, int width, int height){
 		int dy = frame.getHeight() - mapContentPane.getHeight();
 		int dx = frame.getWidth() - mapContentPane.getWidth();
-		frame.setSize(width * 32 + dx, (height < 400 ? 400 : height * 32 + dy));
-		mapImageLabel.setBounds(new Rectangle(0, 0, 32 * width, 32 * height));
+		frame.setSize(width * tileSize + dx, (height < (400 / tileSize) ? 400 : height * tileSize + dy));
+		mapImageLabel.setBounds(new Rectangle(0, 0, tileSize * width, tileSize * height));
 		Color alphaNull = new Color(0, 0, 0, 0);
 		for(int y = 0; y < height; y++){
 			for(int x = 0; x < width; x++){
