@@ -113,5 +113,9 @@ public class MapFactory {
         currentSpawnTile = (currentSpawnTile + 1) % spawnTiles.size();
         return spawnTiles.get(currentSpawnTile);
     }
+    
+    public int getSpawnCount(){
+    	return spawnTiles.size();
+    }
 
 }

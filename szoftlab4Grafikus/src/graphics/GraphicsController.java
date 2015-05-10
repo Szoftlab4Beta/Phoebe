@@ -42,7 +42,7 @@ public class GraphicsController {
 	JLayeredPane mapContentPane;
 	JPanel controlPane;
 	JLabel turnLabel;
-	int tileSize = 32;
+	int tileSize = 24;
 	
 	private JFrame frame;
 	
@@ -246,7 +246,7 @@ public class GraphicsController {
 			for(int x = 0; x < width; x++){
 				TileGraphics tile = new TileGraphics(mapTiles[y][x], x, y);
 				JLayeredPane panel = new JLayeredPane();
-				panel.setBounds(x * 32, y * 32, 32, 32);
+				panel.setBounds(x * tileSize, y * tileSize, tileSize, tileSize);
 				panel.setLayout(new BorderLayout());
 				panel.setBackground(alphaNull);
 				mapContentPane.add(panel);

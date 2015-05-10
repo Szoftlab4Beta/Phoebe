@@ -76,7 +76,7 @@ public class Game {
 		graphicsController.setTurns(0, turns);
 		graphicsController.setCurrentRobot("Robot 0");
 
-		this.playerNum = playerNum;
+		this.playerNum = (playerNum <= mapFactory.getSpawnCount() ? playerNum : mapFactory.getSpawnCount());
 		this.turns = turns;
 		
 		robots = new ArrayList<Robot>();
@@ -185,7 +185,8 @@ public class Game {
 		int index = 0;
 		int max = -1;
 		
-		
+		if(playerNum == 1)
+			return 0;
 		if (currentTurn == turns){
 			for (Robot element : robots) {
 			    if (max < element.getDistance()){
