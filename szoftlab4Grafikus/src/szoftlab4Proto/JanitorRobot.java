@@ -108,9 +108,6 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		
 		position.accept(this);
 		
-		/*if(!pathQueue.isEmpty())
-			pathQueue.pop();*/
-		
 		bounced=false;
 		
 		return isDead() ? UpdateReturnCode.JanitorDied : UpdateReturnCode.Alive;
@@ -126,11 +123,6 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	{
 		float decreaseAmount=p.getMaxDurability()/Patch.getCleanTime();
 		p.decDurabilityBy(decreaseAmount);
-		/*if(p.decDurabilityBy(decreaseAmount)<=0)
-		{
-			workState=JanitorWorkState.Searching;
-			searchNearestPatch();
-		}*/
 	}
 
 	
@@ -144,11 +136,6 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	{
 		float decreaseAmount=p.getMaxDurability()/Patch.getCleanTime();
 		p.decDurabilityBy(decreaseAmount);
-		/*if(p.decDurabilityBy(decreaseAmount)<=0)
-		{
-			workState=JanitorWorkState.Searching;
-			searchNearestPatch();
-		}*/
 	}
 	
 	
@@ -166,11 +153,6 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			if(p!=null)
 			{
 				p.accept(this);
-			}
-			else
-			{
-				searchNearestPatch();
-				workState=JanitorWorkState.Searching;
 			}
 		}
 		
@@ -222,6 +204,12 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		{
 			bounced=true;
 			
+			if(pathQueue.isEmpty())
+			{
+				setDead();
+				return;
+			}
+			
 			Direction nextDir=pathQueue.peek();
 			Direction opp=nextDir.getOpposite();
 			pathQueue.push(opp);
@@ -245,7 +233,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 	{
 		if(workState==JanitorWorkState.Searching)
 		{
-			if(bounced)
+			if(bounced || (pathQueue.isEmpty() && r.pathQueue.isEmpty()))
 			{
 				setDead();
 				return;
