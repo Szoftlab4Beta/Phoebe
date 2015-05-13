@@ -109,7 +109,8 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 		position.accept(this);
 		
 		bounced=false;
-		
+		if(isDead())
+			dispose();
 		return isDead() ? UpdateReturnCode.JanitorDied : UpdateReturnCode.Alive;
 	}
 	
@@ -207,6 +208,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			if(pathQueue.isEmpty())
 			{
 				setDead();
+				((NormalTile)position).setPatch(new Oil(position));
 				return;
 			}
 			
@@ -236,6 +238,7 @@ public class JanitorRobot extends MoveableFieldObject implements IColliding, IUp
 			if(bounced || (pathQueue.isEmpty() && r.pathQueue.isEmpty()))
 			{
 				setDead();
+				((NormalTile)position).setPatch(new Oil(position));
 				return;
 			}
 			
