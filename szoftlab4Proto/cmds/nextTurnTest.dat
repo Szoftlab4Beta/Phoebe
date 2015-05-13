@@ -1,6 +1,7 @@
 newGame(1,30,next_turn_test_map)
 nextTurn
 nextTurn
+getMapTile(1,3)
 nextTurn
 nextTurn
 getMapTile(1,3)
